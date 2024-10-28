@@ -47,13 +47,20 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById("container3D").appendChild(renderer.domElement);
 
 //Set how far the camera will be from the 3D model
-camera.position.set (100, 100, 100);
+camera.position.set (100, 100, 150);
 
 const ambientLight = new THREE.AmbientLight(0x333333, 5);
 scene.add(ambientLight);
 
 //This adds controls to the camera, so we can rotate / zoom it with the mouse
 controls = new OrbitControls(camera, renderer.domElement);
+controls.enableZoom = false;
+controls.maxAzimuthAngle = Math.PI/2;
+controls.minAzimuthAngle = 0;
+
+controls.maxPolarAngle = Math.PI/3;
+controls.minPolarAngle = Math.PI/4;
+
 
 //Render the scene
 function animate() {
