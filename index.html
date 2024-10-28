@@ -1,36 +1,51 @@
-
-</html>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Cooper Kier</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <nav>
-            <ul>
-                <li><a href="#about">About Me</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+          <button id="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+          <ul id="nav-menu" class="hidden">
+            <li><a href="#" data-popup="about">About Me</a></li>
+            <li><a href="#" data-popup="projects">Projects</a></li>
+            <li><a href="#" data-popup="experience">Experience</a></li>
+            <li><a href="#" data-popup="extracurricular">Extracurricular</a></li>
+            <li><a href="#" data-popup="contact">Contact</a></li>
+          </ul>
         </nav>
     </header>
 
-    <main>
-      <div id="container3D"></div>
-    </main>
+    <main> 
+        <div id="container3D"></div> 
+    </main> 
     <script type="module" src="main.js"></script>
 
-    <section id="about">
+    <div class="overlay" id="overlay"></div>
+
+    <section id="about" class="popup">
         <h2>About Me</h2>
-        <p>Hello! I'm [Your Name], a [Your Profession] based in [Your Location]. Welcome to my personal portfolio website!</p>
+        <img src="./_DSC5024.jpg" alt="Photo of Cooper" class="profile-photo">
+        <p>Hello! I'm Cooper, a student at the University of Colorado Boulder. Welcome to my personal portfolio website!</p>
+        <br>
+        <p>I am blae awfkjsdfjadjf
+            dfjsdjfjsdf
+            asfkjsd
+        </p>
+        <button class="close">&times;</button>
     </section>
 
-    <section id="projects">
+    <section id="experience" class="popup">
+        <h2>About Me</h2>
+        <p>Hello! I'm [Your Name], a [Your Profession] based in [Your Location]. Welcome to my personal portfolio website!</p>
+        <button class="close">&times;</button>
+    </section>
+
+    <section id="projects" class="popup">
         <h2>Projects</h2>
         <div class="project">
             <h3>Project Title 1</h3>
@@ -40,16 +55,23 @@
             <h3>Project Title 2</h3>
             <p>Description of the project and technologies used.</p>
         </div>
-        <!-- Add more projects as needed -->
+        <button class="close">&times;</button>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="popup">
         <h2>Contact</h2>
         <p>If you would like to get in touch, please email me at: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+        <button class="close">&times;</button>
     </section>
 
-    <footer>
-        <p>&copy; 2023 [Your Name]</p>
-    </footer>
+    <section id="extracurricular" class="popup">
+        <h2>Contact</h2>
+        <p>If you would like to get in touch, please email me at: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+        <button class="close">&times;</button>
+    </section>
+
+    <script type="module" src="main.js"></script>
+    <script type="module" src="popup.js"></script>
+    <script type="module" src="navbar.js"></script>
 </body>
 </html>
