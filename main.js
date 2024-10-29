@@ -23,7 +23,7 @@ const loader = new GLTFLoader();
 
 //Load the file
 loader.load(
-  `models/${objToRender}/scene.gltf`,
+  `models/${objToRender}/Room.glb`,
   function (gltf) {
     //If the file is loaded, add it to the scene
     object = gltf.scene;
@@ -47,9 +47,9 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById("container3D").appendChild(renderer.domElement);
 
 //Set how far the camera will be from the 3D model
-camera.position.set (100, 100, 150);
+camera.position.set (2,2, 4);
 
-const ambientLight = new THREE.AmbientLight(0x333333, 5);
+const ambientLight = new THREE.AmbientLight(0x333333, 15);
 scene.add(ambientLight);
 
 //This adds controls to the camera, so we can rotate / zoom it with the mouse
