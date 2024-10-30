@@ -2,20 +2,26 @@ import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
 
-//Create a Three.JS Scene
+// Create a Three.JS Scene
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 let object;
 let controls;
 
-//Instantiate a loader for the .gltf file
+
+// Instantiate a loader for the .gltf file
 const loader = new GLTFLoader();
 loader.load(
   `models/room/Room.glb`,
   function (gltf) {
     object = gltf.scene;
-    object.receiveShadow = true;
+    // Enable shadows for the loaded model
+    object.traverse((child) => {
+      if (child.isMesh) {
+        child.castShadow = true;
+      }
+    });
     scene.add(object);
   },
   function (error) {
@@ -23,95 +29,85 @@ loader.load(
   }
 );
 
-//Instantiate a new renderer and set its size
-const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true}); //Alpha: true allows for the transparent background
+const keyLight = new THREE.DirectionalLight(0xff9933, 3);
+keyLight.position.set(5, 5, 5);
+keyLight.castShadow = true;
+keyLight.shadow.mapSize.width = 2048;
+keyLight.shadow.mapSize.height = 2048;
+keyLight.shadow.camera.near = 0.5;
+keyLight.shadow.camera.far = 50;
+keyLight.shadow.camera.left = -10;
+keyLight.shadow.camera.right = 10;
+keyLight.shadow.camera.top = 10;
+keyLight.shadow.camera.bottom = -10;
+scene.add(keyLight);
+
+// Cool blue rim light
+const rimLight = new THREE.SpotLight(0x0066ff, 4);
+rimLight.position.set(-3, 2, -3);
+rimLight.angle = Math.PI / 4;
+rimLight.penumbra = 0.5;
+rimLight.decay = 1.5;
+rimLight.distance = 20;
+scene.add(rimLight);
+
+// Purple fill light
+const fillLight = new THREE.PointLight(0xff00ff, 2, 10);
+fillLight.position.set(-2, 1, 2);
+scene.add(fillLight);
+
+// Cyan accent light
+const accentLight = new THREE.PointLight(0x00ffff, 2, 8);
+accentLight.position.set(2, 0.5, -2);
+scene.add(accentLight);
+
+const whiteLight = new THREE.PointLight(0x000000, 2, 8);
+accentLight.position.set(0, 5, 0);
+scene.add(accentLight);
+
+// Very subtle ambient light
+const ambientLight = new THREE.AmbientLight(0x222222, 2);
+scene.add(ambientLight);
+
+// Instantiate a new renderer and set its size
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
+// Enable physically correct lighting
+renderer.physicallyCorrectLights = true;
+// Add tone mapping for better contrast
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 2.5; // Significantly increased from 1.5 to 2.5
 
-
-//Add the renderer to the DOM
+// Add the renderer to the DOM
 document.getElementById("container3D").appendChild(renderer.domElement);
 
-//Set how far the camera will be from the 3D model
-camera.position.set (2,3, 2);
+// Set how far the camera will be from the 3D model
+camera.position.set(2, 1.5, 2);
 
-//Add lighting
-// let light = new THREE.DirectionalLight(0xFFFFFF, 1.0);
-// light.position.set(2, 2, 1);
-// light.target.position.set(0, 0, 0);
-// light.castShadow = true;
-// light.shadow.bias = -0.001;
-// light.shadow.mapSize.width = 2048;
-// light.shadow.mapSize.height = 2048;
-// light.shadow.camera.near = 0.1;S
-// light.shadow.camera.far = 500.0;
-// light.shadow.camera.near = 0.5;
-// light.shadow.camera.far = 500.0;
-// light.shadow.camera.left = 100;
-// light.shadow.camera.right = -100;
-// light.shadow.camera.top = 100;
-// light.shadow.camera.bottom = -100;
-// scene.add(light);
-
-// let light = new THREE.AmbientLight(0xFFFFFF, 0.5);
-// scene.add(light);
-
-//Add area lighting
-const spotLight = new THREE.SpotLight(0xFF9F69);
-spotLight.position.set(1.0393, -0.29884, 0.9955);
-scene.add( spotLight );
-
-const rectLight = new THREE.RectAreaLight(0xFFDCC5, 10,  4, 4);
-rectLight.position.set(0, 6, 0);
-rectLight.lookAt( 0, 0, 0 );
-scene.add(rectLight)
-
-const rectLight2 = new THREE.RectAreaLight(0xFF7051, 10,  5, 5);
-rectLight2.position.set(-6, 5, -6);
-rectLight2.lookAt(0, 0, 0);
-scene.add(rectLight2)
-
-const rectLight3 = new THREE.RectAreaLight(0x9098C2, 10,  5, 5);
-rectLight3.position.set(-6, 5, 6);
-rectLight3.lookAt(0, 0, 0);
-scene.add(rectLight3)
-
-const rectLight4 = new THREE.RectAreaLight(0xFFB98C, 10,  5, 5);
-rectLight4.position.set(6, 5, 6);
-rectLight4.lookAt(0, 0, 0);
-scene.add(rectLight3)
-
-const rectLight5 = new THREE.RectAreaLight(0xFF9963, 10,  5, 5);
-rectLight5.position.set(6, 5, -6);
-rectLight5.lookAt(0, 0, 0);
-scene.add(rectLight3)
-
-
-//This adds controls to the camera, so we can rotate / zoom it with the mouse
+// This adds controls to the camera
 controls = new OrbitControls(camera, renderer.domElement);
 controls.enableZoom = false;
 controls.maxAzimuthAngle = Math.PI/2;
 controls.minAzimuthAngle = 0;
-
 controls.maxPolarAngle = Math.PI/3;
 controls.minPolarAngle = Math.PI/4;
 
-
-//Render the scene
+// Render the scene
 function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 }
 
-//Add a listener to the window, so we can resize the window and the camera
+// Add a listener to the window for resize
 window.addEventListener("resize", function () {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-//Start the 3D rendering
+// Start the 3D rendering
 animate();
