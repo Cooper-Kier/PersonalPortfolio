@@ -1,6 +1,7 @@
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
+import { showPopup } from './popup.js';
 
 class Scene3D {
   constructor(containerId) {
@@ -21,16 +22,77 @@ class Scene3D {
       this.pc = null;
       this.book = null;
       this.phone = null;
+
+      this.clicking = false;
+      this.hoveredObject = null;
+
+      this.objectToPopupMap = new Map([
+        ['Books', 'about'],
+        ['PC_Screen', 'projects'],
+        ['Case', 'experience'],
+        ['Football', 'extracurricular'],
+        ['Phone', 'contact']
+      ]);
       
+      this.mouseDownTime = 0;
+      this.mouseDownPosition = new THREE.Vector2();
+      this.isDragging = false;
+    
       this.initRenderer();
       this.initCamera();
       this.initControls();
       this.initLights();
       this.initEventListeners();
+      this.initClickHandler();
       this.loadModel();
-      
+    
       this.animate();
   }
+
+  initClickHandler() {
+    this.container.addEventListener('mousedown', () => {
+        console.log('Mouse down detected');
+        this.clicking = true;
+    });
+
+    this.container.addEventListener('mousemove', () => {
+        this.clicking = false;
+    });
+
+    this.container.addEventListener('mouseup', (event) => {
+        console.log('Mouse up detected');
+        if (this.clicking && this.hoveredObject) {
+            console.log('Click registered on object:', this.hoveredObject.name);
+            this.handleObjectClick(this.hoveredObject);
+        }
+        this.clicking = false;
+    });
+  }
+
+  handleObjectClick(object) {
+    const objectName = object.isGroup ? object.name : object.name;
+    console.log('Handling click for object:', objectName);
+    
+    const popupId = this.objectToPopupMap.get(objectName);
+    console.log('Corresponding popup ID:', popupId);
+    
+    if (popupId) {
+        // Temporarily disable controls
+        this.controls.enabled = false;
+        setTimeout(() => {
+            this.controls.enabled = true;
+        }, 10);
+        
+        this.showPopup(popupId);
+    }
+  }
+
+  showPopup(popupId) {
+    console.log('Showing popup:', popupId);
+    showPopup(popupId); // Use the imported showPopup function
+  }
+
+
 
   initRenderer() {
       this.renderer = new THREE.WebGLRenderer({ 
@@ -59,12 +121,21 @@ class Scene3D {
   }
 
   initControls() {
-      this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-      this.controls.enableZoom = false;
-      this.controls.maxAzimuthAngle = Math.PI/2;
-      this.controls.minAzimuthAngle = 0;
-      this.controls.maxPolarAngle = Math.PI/3;
-      this.controls.minPolarAngle = Math.PI/4;
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.enableZoom = false;
+    this.controls.maxAzimuthAngle = Math.PI/2;
+    this.controls.minAzimuthAngle = 0;
+    this.controls.maxPolarAngle = Math.PI/3;
+    this.controls.minPolarAngle = Math.PI/4;
+
+    this.controls.enablePan = false;
+    
+    // Disable OrbitControls automatic handling of mouse events
+    this.controls.enableDamping = true;
+    this.controls.dampingFactor = 0.05;
+    
+    // Make controls less sensitive
+    this.controls.rotateSpeed = 0.5;
   }
 
   initLights() {
@@ -266,9 +337,12 @@ class Scene3D {
   }
 
   initEventListeners() {
-      document.addEventListener('mousemove', this.onMouseMove);
-      window.addEventListener('resize', this.onWindowResize);
+    this.container.addEventListener('mousedown', this.onMouseDown.bind(this));
+    this.container.addEventListener('mousemove', this.onMouseMove.bind(this));
+    this.container.addEventListener('mouseup', this.onMouseUp.bind(this));
+    window.addEventListener('resize', this.onWindowResize.bind(this));
   }
+  
 
   createOutlineMesh(object) {
     // Create a new geometry from the original
@@ -301,13 +375,49 @@ class Scene3D {
     });
   }
 
+  updateOutlineMesh(originalMesh, outlineMesh) {
+    originalMesh.updateWorldMatrix(true, false);
+    outlineMesh.position.setFromMatrixPosition(originalMesh.matrixWorld);
+    outlineMesh.quaternion.setFromRotationMatrix(originalMesh.matrixWorld);
+    outlineMesh.scale.setFromMatrixScale(originalMesh.matrixWorld).multiplyScalar(1.05);
+  }
+
+  onMouseDown = (event) => {
+    this.mouseDownTime = Date.now();
+    this.mouseDownPosition.x = event.clientX;
+    this.mouseDownPosition.y = event.clientY;
+    this.isDragging = false;
+  }
+
+  onMouseUp = (event) => {
+    const clickDuration = Date.now() - this.mouseDownTime;
+    
+    // Only handle as a click if it's a short duration and not a drag
+    if (clickDuration < 200 && !this.isDragging && this.hoveredObject) {
+        console.log('Click detected on:', this.hoveredObject.name);
+        this.handleObjectClick(this.hoveredObject);
+    }
+    
+    this.mouseDownTime = 0;
+    this.isDragging = false;
+  }
+
   onMouseMove = (event) => {
     const rect = this.container.getBoundingClientRect();
     this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
     this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
-    this.raycaster.setFromCamera(this.mouse, this.camera);
+    // Check if user is dragging
+    if (this.mouseDownTime !== 0) {
+        const deltaX = Math.abs(event.clientX - this.mouseDownPosition.x);
+        const deltaY = Math.abs(event.clientY - this.mouseDownPosition.y);
+        if (deltaX > 5 || deltaY > 5) {
+            this.isDragging = true;
+        }
+    }
 
+    // Raycasting for hover effect
+    this.raycaster.setFromCamera(this.mouse, this.camera);
     const meshesToTest = [];
     this.highlightableObjects.forEach((object) => {
         if (object.isGroup) {
@@ -328,29 +438,19 @@ class Scene3D {
         const intersectedObject = intersects[0].object;
         const parentGroup = intersectedObject.userData.parentGroup;
         const objectToHighlight = parentGroup || intersectedObject;
+        this.container.style.cursor = 'pointer';
 
         if (this.hoveredObject !== objectToHighlight) {
             this.clearAllHighlights();
             this.hoveredObject = objectToHighlight;
-
+            
             if (objectToHighlight.isGroup) {
                 objectToHighlight.traverse((child) => {
                     if (child.isMesh) {
                         const outlineData = this.outlineMeshes.get(child.uuid);
                         if (outlineData) {
                             outlineData.mesh.visible = true;
-                            outlineData.mesh.material.color.setHex(0xffffff);
-                            
-                            // Scale up the original object
-                            const originalScale = this.originalScales.get(child.uuid);
-                            if (originalScale) {
-                                child.scale.copy(originalScale).multiplyScalar(1.1);
-                            }
-                            
-                            child.updateWorldMatrix(true, false);
-                            outlineData.mesh.position.setFromMatrixPosition(child.matrixWorld);
-                            outlineData.mesh.quaternion.setFromRotationMatrix(child.matrixWorld);
-                            outlineData.mesh.scale.setFromMatrixScale(child.matrixWorld).multiplyScalar(1.05);
+                            this.updateOutlineMesh(child, outlineData.mesh);
                         }
                     }
                 });
@@ -358,22 +458,12 @@ class Scene3D {
                 const outlineData = this.outlineMeshes.get(objectToHighlight.uuid);
                 if (outlineData) {
                     outlineData.mesh.visible = true;
-                    outlineData.mesh.material.color.setHex(0xffffff);
-                    
-                    // Scale up the original object
-                    const originalScale = this.originalScales.get(objectToHighlight.uuid);
-                    if (originalScale) {
-                        objectToHighlight.scale.copy(originalScale).multiplyScalar(1.05);
-                    }
-                    
-                    objectToHighlight.updateWorldMatrix(true, false);
-                    outlineData.mesh.position.setFromMatrixPosition(objectToHighlight.matrixWorld);
-                    outlineData.mesh.quaternion.setFromRotationMatrix(objectToHighlight.matrixWorld);
-                    outlineData.mesh.scale.setFromMatrixScale(objectToHighlight.matrixWorld).multiplyScalar(1.05);
+                    this.updateOutlineMesh(objectToHighlight, outlineData.mesh);
                 }
             }
         }
     } else {
+        this.container.style.cursor = 'default';
         if (this.hoveredObject) {
             this.clearAllHighlights();
             this.hoveredObject = null;
