@@ -117,7 +117,7 @@ class Scene3D {
           0.1,
           1000
       );
-      this.camera.position.set(2.2, 0, 2.2);
+      this.camera.position.set(3, 0, 2);
   }
 
   initControls() {
@@ -492,3 +492,21 @@ class Scene3D {
 
 // Initialize the scene
 const scene = new Scene3D('container3D');
+
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const popupId = link.getAttribute('data-popup');
+        if (popupId) {
+            showPopup(popupId);
+        }
+    });
+});
+
+// Setup overlay click to close
+document.getElementById('overlay').addEventListener('click', () => {
+    document.querySelectorAll('.popup.active').forEach(popup => {
+        popup.classList.remove('active');
+    });
+    document.getElementById('overlay').classList.remove('active');
+});

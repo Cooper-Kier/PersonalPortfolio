@@ -7,70 +7,53 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h2>CK.</h2>
-        <nav>
-            <a href="#" popup="about">About Me</a>
-            <a href="#" popup="projects">Projects</a>
-            <a href="#" popup="experience">Experience</a>
-            <a href="#" popup="extracurricular">Extracurricular</a>
-            <a href="#" popup="contact">Contact</a>
-        </nav>
-    </header>
+    <nav>
+        <h1>CK.</h1>
+        <ul>
+            <li><a href="#" data-popup="about">About Me</a></li>
+            <li><a href="#" data-popup="projects">Projects</a></li>
+            <li><a href="#" data-popup="experience">Experience</a></li>
+            <li><a href="#" data-popup="extracurricular">Extracurricular</a></li>
+            <li><a href="#" data-popup="contact">Contact</a></li>
+        </ul>
+    </nav>
 
-    <main> 
-        <div id="container3D"></div> 
-    </main>
+    <div id="container3D"></div>
 
-    <div class="overlay" id="overlay"></div>
+    <div id="overlay" class="overlay"></div>
 
-    <section id="about" class="popup">
+    <div id="about" class="popup">
         <h2>About Me</h2>
         <div class="image-container">
-            <img src="./_DSC5024.jpg" alt="Photo of Cooper" class="profile-photo">
+            <img src="./_DSC5024.jpg" alt="Profile Photo" class="profile-photo">
         </div>
-        <p>Hello! I'm Cooper, a student at the University of Colorado Boulder. Welcome to my personal portfolio website!</p>
-        <br>
-        <p>I am blae awfkjsdfjadjf
-            dfjsdjfjsdf
-            asfkjsd
-        </p>
-        <button class="close">x</button>
-    </section>
+        <p>Hello! I'm Cooper, a student at the University of Colorado Boulder.</p>
+    </div>
 
-    <section id="experience" class="popup">
-        <h2>About Me</h2>
-        <p>Hello! I'm [Your Name], a [Your Profession] based in [Your Location]. Welcome to my personal portfolio website!</p>
-        <button class="close">x</button>
-    </section>
-
-    <section id="projects" class="popup">
+    <div id="projects" class="popup">
         <h2>Projects</h2>
         <div class="project">
             <h3>Project Title 1</h3>
             <p>Description of the project and technologies used.</p>
         </div>
-        <div class="project">
-            <h3>Project Title 2</h3>
-            <p>Description of the project and technologies used.</p>
-        </div>
-        <button class="close">x</button>
-    </section>
+    </div>
 
-    <section id="contact" class="popup">
+    <div id="experience" class="popup">
+        <h2>Experience</h2>
+        <p>Your experience content here...</p>
+    </div>
+
+    <div id="extracurricular" class="popup">
+        <h2>Extracurricular Activities</h2>
+        <p>Your extracurricular content here...</p>
+    </div>
+
+    <div id="contact" class="popup">
         <h2>Contact</h2>
         <p>If you would like to get in touch, please email me at: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-        <button class="close">x</button>
-    </section>
-
-    <section id="extracurricular" class="popup">
-        <h2>Contact</h2>
-        <p>If you would like to get in touch, please email me at: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-        <button class="close">x</button>
-    </section>
+    </div>
 
     <script type="module" src="main.js"></script>
     <script type="module" src="popup.js"></script>
-    <script type="module" src="navbar.js"></script>
 </body>
 </html>
