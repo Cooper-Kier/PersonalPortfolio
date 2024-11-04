@@ -1,39 +1,41 @@
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
-import { showPopup } from './popup.js';
+import { showPopup } from './popup.js'; 
 
 class Scene3D {
   constructor(containerId) {
+    //Scene 
     this.container = document.getElementById(containerId);
     this.scene = new THREE.Scene();
+
+    //Objects
     this.highlightableObjects = new Map();
     this.outlineMeshes = new Map();
-    this.originalScales = new Map(); // Store original scales
+    this.originalScales = new Map();
+    this.hoveredObject = null;
+
+    this.externalLinks = new Map([
+      ['Github', 'https://github.com/Cooper-Kier'],
+      ['LinkedIn', 'https://www.linkedin.com/in/cooper-kier-b2bb112a0/']  // Replace with your LinkedIn username
+    ]);
+
+    this.objectToPopupMap = new Map([
+      ['Books', 'about'],
+      ['Flag', 'about'],
+      ['PC_Screen', 'projects'],
+      ['Case', 'experience'],
+      ['Football', 'extracurricular'],
+      ['Phone', 'contact']
+    ]);
+
+    //Mouse
     this.mouse = new THREE.Vector2();
     this.raycaster = new THREE.Raycaster();
     this.raycaster.params.Line.threshold = 0.1;
     this.raycaster.params.Points.threshold = 0.1;
 
-    //Objects
-    this.football = null;
-    this.flag = null;
-    this.case = null;
-    this.pc = null;
-    this.book = null;
-    this.phone = null;
-
-    this.clicking = false;
-    this.hoveredObject = null;
-
-    this.objectToPopupMap = new Map([
-    ['Books', 'about'],
-    ['PC_Screen', 'projects'],
-    ['Case', 'experience'],
-    ['Football', 'extracurricular'],
-    ['Phone', 'contact']
-    ]);
-
+    //Initiallers
     this.initRenderer();
     this.initCamera();
     this.initControls();
@@ -44,6 +46,8 @@ class Scene3D {
     this.animate();
   }
 
+
+  //Initializers
   initRenderer() {
     this.renderer = new THREE.WebGLRenderer({ 
         alpha: true, 
@@ -134,6 +138,12 @@ class Scene3D {
     light.shadow.camera.bottom = -10;
   }
 
+  initEventListeners() {
+    this.container.addEventListener('mousemove', this.onMouseMove.bind(this));
+    this.container.addEventListener('click', this.onClick.bind(this));
+    window.addEventListener('resize', this.onWindowResize.bind(this));
+  }
+
   loadModel() {
     const loader = new GLTFLoader();
     const outlineMaterial = new THREE.MeshBasicMaterial({
@@ -142,7 +152,7 @@ class Scene3D {
     });
 
     loader.load(
-        'models/room/Room.glb',
+        'models/Room.glb',
         (gltf) => {
             const object = gltf.scene;
             this.processSceneObjects(object, outlineMaterial);
@@ -153,13 +163,17 @@ class Scene3D {
     );
   }
 
+  //Group meshes to object
   processSceneObjects(object, outlineMaterial) {
     object.traverse((child) => {
         if (child.name === 'Football' ||
             child.name === 'Case' ||
             child.name === 'PC_Screen' ||
             child.name === 'Books' ||
-            child.name === 'Phone' ){
+            child.name === 'Phone' ||
+            child.name === 'Flag' ||
+            child.name === 'Github' ||
+            child.name === 'LinkedIn'){
             if (child.isMesh) {
                 child.castShadow = true;
                 
@@ -180,20 +194,26 @@ class Scene3D {
             }
         }
         if (child.name === 'Football') {
-            this.football = child;
+          this.football = child;
         } else if (child.name === 'Case') {
-            this.case = child;
+          this.case = child;
         } else if (child.name === 'PC_Screen') {
-            this.pc = child;
+          this.pc = child;
         } else if (child.name === 'Books') {
-            this.book = child;
+          this.book = child;
         } else if (child.name === 'Phone') {
-            this.phone = child;
+          this.phone = child;
+        } else if (child.name === 'Github') {
+          this.git = child;
+        } else if (child.name === 'LinkedIn') {
+          this.linked = child;
+        } else if (child.name === 'Flag') {
+          this.flag = child;
         }
     });
   }
 
-
+  //Highlighting object methods
   clearAllHighlights() {
     this.outlineMeshes.forEach(({mesh, originalObject}) => {
         mesh.visible = false;
@@ -203,93 +223,14 @@ class Scene3D {
         }
     });
   }
-
-  highlightObjectByName(name, highlightColor = 0xffffff) {
-    const object = this.highlightableObjects.get(name);
-    
-    if (object) {
-        this.clearAllHighlights();
-        this.currentHighlightedObject = object;
-        
-        if (object.isGroup) {
-            object.traverse((child) => {
-                if (child.isMesh) {
-                    const outlineData = this.outlineMeshes.get(child.uuid);
-                    if (outlineData) {
-                        outlineData.mesh.material.color.setHex(highlightColor);
-                        outlineData.mesh.visible = true;
-                        
-                        const originalScale = this.originalScales.get(child.uuid);
-                        if (originalScale) {
-                            child.scale.copy(originalScale).multiplyScalar(1.05);
-                        }
-                        
-                        child.updateWorldMatrix(true, false);
-                        outlineData.mesh.matrix.copy(child.matrixWorld);
-                        outlineData.mesh.scale.set(1.05, 1.05, 1.05);
-                    }
-                }
-            });
-        } else {
-            const outlineData = this.outlineMeshes.get(object.uuid);
-            if (outlineData) {
-                outlineData.mesh.material.color.setHex(highlightColor);
-                outlineData.mesh.visible = true;
-                
-                const originalScale = this.originalScales.get(object.uuid);
-                if (originalScale) {
-                    object.scale.copy(originalScale).multiplyScalar(1.05);
-                }
-                
-                object.updateWorldMatrix(true, false);
-                outlineData.mesh.matrix.copy(object.matrixWorld);
-                outlineData.mesh.scale.set(1.05, 1.05, 1.05);
-            }
-        }
-    }
-  }
-
-  removeHighlight(name) {
-    const object = this.highlightableObjects.get(name);
-    
-    if (object) {
-        if (object.isGroup) {
-            object.traverse((child) => {
-                if (child.isMesh) {
-                    const outlineMesh = this.outlineMeshes.get(child.uuid);
-                    if (outlineMesh) {
-                        outlineMesh.visible = false;
-                    }
-                }
-            });
-        } else {
-            const outlineMesh = this.outlineMeshes.get(object.uuid);
-            if (outlineMesh) {
-                outlineMesh.visible = false;
-            }
-        }
-    }
-  }
-
-  onWindowResize = () => {
-      this.camera.aspect = window.innerWidth / window.innerHeight;
-      this.camera.updateProjectionMatrix();
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
-  }
-
-  initEventListeners() {
-    this.container.addEventListener('mousemove', this.onMouseMove.bind(this));
-    window.addEventListener('resize', this.onWindowResize.bind(this));
-  }
   
-
   createOutlineMesh(object) {
     const outlineGeometry = object.geometry.clone();
     const outlineMaterial = new THREE.MeshBasicMaterial({
         color: 0xffffff,
         side: THREE.BackSide,
         transparent: true,
-        opacity: 0.4
+        opacity: 0.1
     });
     
     const outlineMesh = new THREE.Mesh(outlineGeometry, outlineMaterial);
@@ -300,7 +241,7 @@ class Scene3D {
     object.updateWorldMatrix(true, false);
     outlineMesh.position.setFromMatrixPosition(object.matrixWorld);
     outlineMesh.quaternion.setFromRotationMatrix(object.matrixWorld);
-    outlineMesh.scale.setFromMatrixScale(object.matrixWorld).multiplyScalar(1.05);
+    outlineMesh.scale.setFromMatrixScale(object.matrixWorld).multiplyScalar(1);
     
     outlineMesh.visible = false;
     
@@ -314,73 +255,122 @@ class Scene3D {
     originalMesh.updateWorldMatrix(true, false);
     outlineMesh.position.setFromMatrixPosition(originalMesh.matrixWorld);
     outlineMesh.quaternion.setFromRotationMatrix(originalMesh.matrixWorld);
-    outlineMesh.scale.setFromMatrixScale(originalMesh.matrixWorld).multiplyScalar(1.05);
+    outlineMesh.scale.setFromMatrixScale(originalMesh.matrixWorld).multiplyScalar(1);
+  }
+  
+  //User event handling
+  onWindowResize = () => {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
   }
 
-  onMouseMove = (event) => {
-    const rect = this.container.getBoundingClientRect();
-    this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-    this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-
-    // Raycasting for hover effect
+  onClick = (event) => {
     this.raycaster.setFromCamera(this.mouse, this.camera);
-    const meshesToTest = [];
-    this.highlightableObjects.forEach((object) => {
-        if (object.isGroup) {
-            object.traverse((child) => {
-                if (child.isMesh) {
-                    child.userData.parentGroup = object;
-                    meshesToTest.push(child);
-                }
-            });
-        } else if (object.isMesh) {
-            meshesToTest.push(object);
-        }
-    });
+    const meshesToTest = Array.from(this.highlightableObjects.values()).reduce((acc, object) => {
+      if (object.isGroup) {
+        object.traverse((child) => {
+          if (child.isMesh) {
+            child.userData.parentObject = object;
+            acc.push(child);
+          }
+        });
+      } else if (object.isMesh) {
+        acc.push(object);
+      }
+      return acc;
+    }, []);
 
     const intersects = this.raycaster.intersectObjects(meshesToTest, false);
 
     if (intersects.length > 0) {
-        const intersectedObject = intersects[0].object;
-        const parentGroup = intersectedObject.userData.parentGroup;
-        const objectToHighlight = parentGroup || intersectedObject;
-        this.container.style.cursor = 'pointer';
+      const intersectedObject = intersects[0].object;
+      const targetObject = intersectedObject.userData.parentObject || intersectedObject;
+      
+      console.log(`Clicked: ${targetObject.name}`);
+      
+      const externalLink = this.externalLinks.get(targetObject.name);
+      if (externalLink) {
+        window.open(externalLink, '_blank', 'noopener,noreferrer');
+        return;
+      }
+      
+      const popupId = this.objectToPopupMap.get(targetObject.name);
+      if (popupId) {
+        showPopup(popupId);
+      }
+    }
+  }
 
-        if (this.hoveredObject !== objectToHighlight) {
-            this.clearAllHighlights();
-            this.hoveredObject = objectToHighlight;
-            
-            if (objectToHighlight.isGroup) {
-                objectToHighlight.traverse((child) => {
-                    if (child.isMesh) {
-                        const outlineData = this.outlineMeshes.get(child.uuid);
-                        if (outlineData) {
-                            outlineData.mesh.visible = true;
-                            this.updateOutlineMesh(child, outlineData.mesh);
-                        }
-                    }
-                });
-            } else {
-                const outlineData = this.outlineMeshes.get(objectToHighlight.uuid);
-                if (outlineData) {
-                    outlineData.mesh.visible = true;
-                    this.updateOutlineMesh(objectToHighlight, outlineData.mesh);
-                }
+  onMouseMove = (event) => {
+    const rect = this.renderer.domElement.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    
+    this.mouse.x = (x / this.renderer.domElement.clientWidth) * 2 - 1;
+    this.mouse.y = -(y / this.renderer.domElement.clientHeight) * 2 + 1;
+
+    this.raycaster.setFromCamera(this.mouse, this.camera);
+    
+    const meshes = Array.from(this.highlightableObjects.values()).reduce((acc, object) => {
+      if (object.isGroup) {
+        object.traverse((child) => {
+          if (child.isMesh) {
+            child.userData.parentGroup = object;
+            acc.push(child);
+          }
+        });
+      } else if (object.isMesh) {
+        acc.push(object);
+      }
+      return acc;
+    }, []);
+
+    const intersects = this.raycaster.intersectObjects(meshes, false);
+
+    if (intersects.length > 0) {
+      const intersectedObject = intersects[0].object;
+      const parentGroup = intersectedObject.userData.parentGroup;
+      const objectToHighlight = parentGroup || intersectedObject;
+      
+      if (this.hoveredObject !== objectToHighlight) {
+        console.log(`Hovering: ${objectToHighlight.name}`);
+        this.container.style.cursor = 'pointer';
+        this.clearAllHighlights();
+        this.hoveredObject = objectToHighlight;
+        
+        if (objectToHighlight.isGroup) {
+          objectToHighlight.traverse((child) => {
+            if (child.isMesh) {
+              const outlineData = this.outlineMeshes.get(child.uuid);
+              if (outlineData) {
+                outlineData.mesh.visible = true;
+                this.updateOutlineMesh(child, outlineData.mesh);
+              }
             }
+          });
+        } else {
+          const outlineData = this.outlineMeshes.get(objectToHighlight.uuid);
+          if (outlineData) {
+            outlineData.mesh.visible = true;
+            this.updateOutlineMesh(objectToHighlight, outlineData.mesh);
+          }
         }
+      }
     } else {
+      if (this.hoveredObject) {
         this.container.style.cursor = 'default';
-        if (this.hoveredObject) {
-            this.clearAllHighlights();
-            this.hoveredObject = null;
-        }
+        this.clearAllHighlights();
+        this.hoveredObject = null;
+      }
     }
   }
   
+
+  
   animate = () => {
       requestAnimationFrame(this.animate);
-      
-      // Update all visible outline meshes
+
       this.outlineMeshes.forEach(({mesh, originalObject}) => {
           if (mesh.visible) {
               originalObject.updateWorldMatrix(true, false);
