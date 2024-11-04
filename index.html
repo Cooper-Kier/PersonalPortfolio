@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cooper Kier</title>
     <link rel="stylesheet" href="style.css">
+    <title>Cooper Kier</title>
 </head>
 <body>
+    <!-- Nav Bar -->
     <nav>
-        <h1>CK.</h1>
+        <h2>CK.</h2>
         <ul>
             <li><a href="#" data-popup="about">About Me</a></li>
             <li><a href="#" data-popup="projects">Projects</a></li>
@@ -19,43 +20,165 @@
     </nav>
 
     <div id="container3D"></div>
-
     <div id="overlay" class="overlay"></div>
 
+    <!-- About Popup -->
     <div id="about" class="popup">
-        <button class="close">&times;</button>
-        <h2>About Me</h2>
-        <div class="image-container">
-            <img src="./Images/profile.jpg" alt="Profile Photo" class="profile-photo">
+        <button class="close-btn">x</button>
+        <div class="popup-content">
+            <h2 class="section-title">About Me</h2>
+            
+            <div class="profile-section">
+                <img src="./Images/profile.jpg" alt="Cooper Kier" class="profile-img">
+                <p class="intro-text">Hello! I'm Cooper, a student at the University of Colorado Boulder passionate about technology and innovation.</p>
+            </div>
+
+            <div class="content-card">
+                <h3 class="card-title">Education</h3>
+                <div class="card-content">
+                    <p class="card-text"><strong>University of Colorado Boulder</strong><br>
+                    Computer Science, B.S.<br>
+                    Expected Graduation: 2025</p>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h3 class="card-title">Technical Skills</h3>
+                <div class="card-grid">
+                    <div class="skill-group">
+                        <h4 class="skill-title">Languages</h4>
+                        <ul class="skill-list">
+                            <li>JavaScript/TypeScript</li>
+                            <li>Python</li>
+                            <li>Java</li>
+                            <li>C++</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group">
+                        <h4 class="skill-title">Technologies</h4>
+                        <ul class="skill-list">
+                            <li>React</li>
+                            <li>Three.js</li>
+                            <li>Node.js</li>
+                            <li>Git</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p>Hello! I'm Cooper, a student at the University of Colorado Boulder.</p>
     </div>
 
+    <!-- Projects Popup -->
     <div id="projects" class="popup">
-        <button class="close">&times;</button>
-        <h2>Projects</h2>
-        <div class="project">
-            <h3>Project Title 1</h3>
-            <p>Description of the project and technologies used.</p>
+        <button class="close-btn">x</button>
+        <div class="popup-content">
+            <h2 class="section-title">Projects</h2>
+            
+            <div class="content-card featured">
+                <h3 class="card-title">3D Portfolio Website</h3>
+                <div class="card-content">
+                    <p class="card-text">An interactive portfolio website built using Three.js, featuring a 3D room environment with clickable objects that reveal different sections of content.</p>
+                    <div class="tag-container">
+                        <span class="tag">Three.js</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">WebGL</span>
+                        <span class="tag">3D Modeling</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-grid">
+                <div class="content-card">
+                    <h3 class="card-title">Project Title 1</h3>
+                    <p class="card-text">Description of your project and its key features.</p>
+                    <div class="tag-container">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h3 class="card-title">Project Title 2</h3>
+                    <p class="card-text">Description of your project and its key features.</p>
+                    <div class="tag-container">
+                        <span class="tag">Python</span>
+                        <span class="tag">Machine Learning</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- Experience Popup -->
     <div id="experience" class="popup">
-        <button class="close">&times;</button>
-        <h2>Experience</h2>
-        <p>Your experience content here...</p>
-    </div>
+        <button class="close-btn">x</button>
+        <div class="popup-content">
+            <h2 class="section-title">Experience</h2>
+            
+            <div class="timeline">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Software Development Intern</h3>
+                        <span class="date">Summer 2023</span>
+                    </div>
+                    <p class="company">Company Name</p>
+                    <ul class="bullet-list">
+                        <li>Developed and maintained web applications using React and Node.js</li>
+                        <li>Collaborated with senior developers on large-scale projects</li>
+                        <li>Implemented new features and resolved bug fixes</li>
+                    </ul>
+                </div>
 
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Research Assistant</h3>
+                        <span class="date">Fall 2022</span>
+                    </div>
+                    <p class="company">University of Colorado Boulder</p>
+                    <ul class="bullet-list">
+                        <li>Assisted in research projects focused on computer graphics</li>
+                        <li>Developed algorithms for 3D visualization</li>
+                        <li>Published findings in academic papers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Extercuricular Popup -->
     <div id="extracurricular" class="popup">
-        <button class="close">&times;</button>
-        <h2>Extracurricular Activities</h2>
-        <p>extracurricular content</p>
+        <button class="close-btn">x</button>
+        <div class="popup-content">
+            <h2 class="section-title">Extercuricular</h2>
+            <div class="content-card">
+                <p class="card-text">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+            </div>
+            <div class="content-card">
+                <p class="card-text">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+            </div>
+            <div class="content-card">
+                <p class="card-text">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+            </div>
+        </div>
     </div>
 
+    <!-- Contact Popup -->
     <div id="contact" class="popup">
-        <button class="close">&times;</button>
-        <h2>Contact</h2>
-        <p>If you would like to get in touch, please email me at: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+        <button class="close-btn">x</button>
+        <div class="popup-content">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="content-card">
+                <p class="card-text">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+                <div class="contact-links">
+                    <p>cooperkier18@gmail.com</p>
+                    <p>303-915-2517</p>
+                    <div class="social-links">
+                        <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a href="https://www.linkedin.com/in/cooper-kier-b2bb112a0/" class="social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script type="module" src="main.js"></script>

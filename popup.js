@@ -24,7 +24,7 @@ export function showPopup(popupId) {
             }, 10);
         };
         
-        const closeButton = popup.querySelector('.close');
+        const closeButton = popup.querySelector('.close-btn');
         if (closeButton) {
             closeButton.onclick = closePopup;
         }
