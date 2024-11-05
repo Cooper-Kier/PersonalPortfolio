@@ -151,16 +151,31 @@ class Scene3D {
         side: THREE.BackSide
     });
 
-    loader.load(
-        'models/Room.glb',
-        (gltf) => {
-            const object = gltf.scene;
-            this.processSceneObjects(object, outlineMaterial);
-            this.scene.add(object);
-        },
-        undefined,
-        (error) => console.error(error)
-    );
+    // Add loading manager to debug issues
+    const loadingManager = new THREE.LoadingManager();
+    loadingManager.onError = function(url) {
+        console.error('Error loading:', url);
+    };
+
+    // Use absolute path and add error handling
+    loader.setPath('/models/');
+    loader
+        .load(
+            'Room.glb',
+            (gltf) => {
+                const object = gltf.scene;
+                this.processSceneObjects(object, outlineMaterial);
+                this.scene.add(object);
+            },
+            // Progress callback
+            (xhr) => {
+                console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+            },
+            // Error callback
+            (error) => {
+                console.error('An error occurred loading the model:', error);
+            }
+        );
   }
 
   //Group meshes to object
