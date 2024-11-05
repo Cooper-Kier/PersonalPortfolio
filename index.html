@@ -13,6 +13,11 @@
 </head>
 <body>
     <nav>
+        <button class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         <h2>CK.</h2>
         <ul>
             <li><a href="#" data-popup="about">About Me</a></li>
@@ -299,5 +304,11 @@
             </div>
         </div>
     </div>
+    <!-- Nav bar  -->
+    <script>
+        document.querySelector('.nav-toggle').addEventListener('click', () => {
+            document.querySelector('nav').classList.toggle('active');
+        });
+    </script>
 </body>
 </html>

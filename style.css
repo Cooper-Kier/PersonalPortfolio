@@ -80,6 +80,89 @@ nav a:hover::after {
   width: 100%;
 }
 
+/* Hamburger Menu Button */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  z-index: 1001;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: white;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  nav {
+    padding: 1rem;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  nav ul {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    transition: right 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  nav.active ul {
+    right: 0;
+  }
+
+  /* Hamburger Animation */
+  nav.active .nav-toggle span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  nav.active .nav-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+
+  nav.active .nav-toggle span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+
+  /* Ensure container moves down enough to account for mobile nav */
+  #container3D {
+    padding-top: 80px;
+  }
+}
+
+/* Additional mobile optimization */
+@media (max-width: 480px) {
+  nav ul {
+    width: 100%;
+    padding: 2rem;
+  }
+
+  nav a {
+    font-size: 1.2rem;
+    padding: 1rem 0;
+  }
+}
+
 /* 3D Scene Container */
 #container3D {
   padding-top: 110px;
