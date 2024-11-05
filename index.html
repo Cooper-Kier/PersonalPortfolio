@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cooper Kier's portfolio - Computer Science and Electrical Engineering student at University of Colorado Boulder">
+    <meta name="keywords" content="Cooper Kier, portfolio, computer science, electrical engineering, CU Boulder">
+    <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="style.css">
+    <script type="module" src="main.js"></script>
+    <script type="module" src="popup.js"></script>
     <title>Cooper Kier</title>
 </head>
 <body>
-    <!-- Nav Bar -->
     <nav>
         <h2>CK.</h2>
         <ul>
             <li><a href="#" data-popup="about">About Me</a></li>
             <li><a href="#" data-popup="projects">Projects</a></li>
             <li><a href="#" data-popup="experience">Experience</a></li>
-            <li><a href="#" data-popup="extracurricular">Extracurricular</a></li>
+            <li><a href="#" data-popup="extracurricular">Leadership</a></li>
             <li><a href="#" data-popup="contact">Contact</a></li>
         </ul>
     </nav>
@@ -22,23 +26,26 @@
     <div id="container3D"></div>
     <div id="overlay" class="overlay"></div>
 
-    <!-- About Popup -->
+    <!-- About Section -->
     <div id="about" class="popup">
-        <button class="close-btn">x</button>
         <div class="popup-content">
+            <button class="close-btn">x</button>
             <h2 class="section-title">About Me</h2>
-            
+
             <div class="profile-section">
                 <img src="./Images/profile.jpg" alt="Cooper Kier" class="profile-img">
-                <p class="intro-text">Hello! I'm Cooper, a student at the University of Colorado Boulder passionate about technology and innovation.</p>
+                <p>Hello! I'm Cooper. Welcome to my interactive portfolio. I am currently a student at the University of Colorado Boulder, where I am deeply passionate about engineering and technology. Outside of my academic pursuits, I enjoy skiing, playing football, and getting immersed in various video games. Feel free to explore my portfolio to see how my interests and skills come together in my projects and experiences.</p>
             </div>
 
             <div class="content-card">
                 <h3 class="card-title">Education</h3>
                 <div class="card-content">
-                    <p class="card-text"><strong>University of Colorado Boulder</strong><br>
-                    Computer Science, B.S.<br>
-                    Expected Graduation: 2025</p>
+                    <p><strong>University of Colorado Boulder</strong><br>
+                    <em>Computer Science, B.S.</em><br>
+                    <em>Electrical and Computer Engineering, B.S.</em></p>
+                    <p>Expected Graduation: May 2027<br>
+                    GPA: 3.65<br>
+                    Achievements: Dean's List</p>
                 </div>
             </div>
 
@@ -48,19 +55,22 @@
                     <div class="skill-group">
                         <h4 class="skill-title">Languages</h4>
                         <ul class="skill-list">
-                            <li>JavaScript/TypeScript</li>
-                            <li>Python</li>
-                            <li>Java</li>
                             <li>C++</li>
+                            <li>Python</li>
+                            <li>SQL</li>
+                            <li>Swift/SwiftUI</li>
+                            <li>MATLAB</li>
                         </ul>
                     </div>
                     <div class="skill-group">
                         <h4 class="skill-title">Technologies</h4>
                         <ul class="skill-list">
-                            <li>React</li>
-                            <li>Three.js</li>
-                            <li>Node.js</li>
+                            <li>AWS</li>
+                            <li>TensorFlow</li>
                             <li>Git</li>
+                            <li>React</li>
+                            <li>Node.js</li>
+                            <li>HTML/CSS</li>
                         </ul>
                     </div>
                 </div>
@@ -68,110 +78,219 @@
         </div>
     </div>
 
-    <!-- Projects Popup -->
+    <!-- Projects Section -->
     <div id="projects" class="popup">
-        <button class="close-btn">x</button>
         <div class="popup-content">
-            <h2 class="section-title">Projects</h2>
-            
-            <div class="content-card featured">
-                <h3 class="card-title">3D Portfolio Website</h3>
-                <div class="card-content">
-                    <p class="card-text">An interactive portfolio website built using Three.js, featuring a 3D room environment with clickable objects that reveal different sections of content.</p>
+            <button class="close-btn">x</button>
+        
+        <h2 class="section-title">Projects</h2>
+        
+            <div class="content-card">
+                <h3 class="card-title">3D Interactive Portfolio - Web Application</h3>
+                    <div class="card-content">
+                    A modern, interactive portfolio website featuring a 3D environment built with Three.js and modern web technologies.
+                    
+                    <ul class="bullet-list">
+                        <li>Developed an immersive 3D room environment with interactive objects</li>
+                        <li>Implemented raycasting for object interaction and highlighting effects</li>
+                        <li>Created a responsive popup system for content display</li>
+                        <li>Integrated smooth camera controls and transitions</li>
+                    </ul>
+
+                    <div class="social-links">
+                        <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                    
                     <div class="tag-container">
                         <span class="tag">Three.js</span>
                         <span class="tag">JavaScript</span>
-                        <span class="tag">WebGL</span>
-                        <span class="tag">3D Modeling</span>
+                        <span class="tag">HTML/CSS</span>
+                        <span class="tag">3D Graphics</span>
                     </div>
                 </div>
             </div>
+            
+            <div class="content-card">
+                <h3 class="card-title">PriceThat - iOS Application</h3>
+                    <div class="card-content">
+                    A mobile application published on Apple's App Store with over 100 downloads, featuring machine learning-powered functionality.
+                    
+                    <ul class="bullet-list">
+                        <li>Integrated AWS API Gateway and Lambda for user data processing</li>
+                        <li>Scraped and refined 20,000+ data points for ML model training</li>
+                        <li>Achieved 87% accuracy with TensorFlow model using Google Colab and Keras</li>
+                    </ul>
 
-            <div class="card-grid">
-                <div class="content-card">
-                    <h3 class="card-title">Project Title 1</h3>
-                    <p class="card-text">Description of your project and its key features.</p>
-                    <div class="tag-container">
-                        <span class="tag">React</span>
-                        <span class="tag">Node.js</span>
+                    <div class="social-links">
+                        <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                     </div>
-                </div>
-
-                <div class="content-card">
-                    <h3 class="card-title">Project Title 2</h3>
-                    <p class="card-text">Description of your project and its key features.</p>
+                    
                     <div class="tag-container">
-                        <span class="tag">Python</span>
+                        <span class="tag">Swift</span>
+                        <span class="tag">AWS</span>
+                        <span class="tag">TensorFlow</span>
                         <span class="tag">Machine Learning</span>
                     </div>
                 </div>
             </div>
+            
+            <div class="content-card">
+                <h3 class="card-title">Personal Finance Tracker</h3>
+                    <div class="card-content">
+                    A full-stack web application for tracking personal finances with modern security features.
+                    
+                    <ul class="bullet-list">
+                        <li>Built responsive UI with React and TypeScript</li>
+                        <li>Implemented Clerk authentication for user sign-in</li>
+                        <li>Developed RESTful APIs using Express.js and Node.js</li>
+                        <li>Managed data with MongoDB and Mongoose</li>
+                    </ul>
+
+                    <div class="social-links">
+                        <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                    
+                    <div class="tag-container">
+                        <span class="tag">React</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <h3 class="card-title">Alarm Sleep Mask</h3>
+                    <div class="card-content">
+                    An innovative alarm solution that won 1st place in class at the Engineering Expo.
+                    
+                    <ul class="bullet-list">
+                        <li>Led team development of unique alarm solution</li>
+                        <li>Integrated Arduino microcontroller with Bluetooth connectivity</li>
+                        <li>Managed project using Trello and Miro for team coordination</li>
+                    </ul>
+                    
+                    <div class="tag-container">
+                        <span class="tag">Arduino</span>
+                        <span class="tag">Bluetooth</span>
+                        <span class="tag">Hardware</span>
+                        <span class="tag">Teamwork</span>
+                    </div>
+                </div>
+            </div>
+        
         </div>
     </div>
 
-    <!-- Experience Popup -->
+    <!-- Experience Section -->
     <div id="experience" class="popup">
-        <button class="close-btn">x</button>
         <div class="popup-content">
+            <button class="close-btn">x</button>
             <h2 class="section-title">Experience</h2>
-            
+
             <div class="timeline">
                 <div class="content-card">
                     <div class="card-header">
-                        <h3 class="card-title">Software Development Intern</h3>
-                        <span class="date">Summer 2023</span>
+                        <h3 class="card-title">Leak Survey Intern</h3>
+                        <span class="date">May 2024 - August 2024</span>
                     </div>
-                    <p class="company">Company Name</p>
+                    <p class="company">HydromaxUSA</p>
                     <ul class="bullet-list">
-                        <li>Developed and maintained web applications using React and Node.js</li>
-                        <li>Collaborated with senior developers on large-scale projects</li>
-                        <li>Implemented new features and resolved bug fixes</li>
+                        <li>Conducted daily surveys of Xcel Energy assets for consumer protection</li>
+                        <li>Documented average of 4 gas leaks daily, covering 85,000+ feet weekly</li>
+                        <li>Ranked consistently in top 5 employees for daily productivity</li>
+                        <li>Maintained detailed documentation for colleagues and management</li>
                     </ul>
                 </div>
 
                 <div class="content-card">
                     <div class="card-header">
-                        <h3 class="card-title">Research Assistant</h3>
-                        <span class="date">Fall 2022</span>
+                        <h3 class="card-title">Other Non-Technical Roles</h3>
+                        <span class="date">2019-2023</span>
                     </div>
-                    <p class="company">University of Colorado Boulder</p>
                     <ul class="bullet-list">
-                        <li>Assisted in research projects focused on computer graphics</li>
-                        <li>Developed algorithms for 3D visualization</li>
-                        <li>Published findings in academic papers</li>
+                        <li>Life Guard</li>
+                        <li>Grocery Clerk</li>
+                        <li>Landscaper</li>
+                        <li>Smootie Expert :)</li>
+                        <li>I love Smoothies</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Extercuricular Popup -->
+
+    <!-- Extracurricular Section -->
     <div id="extracurricular" class="popup">
-        <button class="close-btn">x</button>
         <div class="popup-content">
-            <h2 class="section-title">Extercuricular</h2>
+            <div class="close-btn">x</div>
+    
+            <h2 class="section-title">Leadership</h2>
+    
             <div class="content-card">
-                <p class="card-text">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+                <h3 class="card-title">Engineering Mentor</h3>
+                <div class="card-header">
+                    <span class="date">2024 - Present</span>
+                </div>
+                <div class="card-content">
+                    <ul class="bullet-list">
+                        <li>Guide and support incoming engineering students in their academic journey at CU Boulder</li>
+                        <li>Facilitate weekly mentoring sessions focused on academic success and professional development</li>
+                        <li>Help students navigate course selection and academic challenges</li>
+                        <li>Share personal experiences and insights to help freshmen adapt to university life</li>
+                    </ul>
+                    <div class="tag-container">
+                        <span class="tag">Mentoring</span>
+                        <span class="tag">Academic Support</span>
+                        <span class="tag">Student Development</span>
+                    </div>
+                </div>
             </div>
+    
             <div class="content-card">
-                <p class="card-text">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+                <h3 class="card-title">Football Team Captain & Quarterback</h3>
+                <div class="card-header">
+                    <span class="date">2019 - 2023</span>
+                </div>
+                <div class="card-content">
+                    <ul class="bullet-list">
+                        <li>Led team as starting quarterback and captain through multiple seasons</li>
+                        <li>Developed strong communication and decision-making skills under pressure</li>
+                        <li>Coordinated team practices and strategy sessions</li>
+                        <li>Mentored younger players in skill development and team dynamics</li>
+                        <li>Fostered team unity and maintained high morale during challenging situations</li>
+                    </ul>
+                    <div class="tag-container">
+                        <span class="tag">Team Leadership</span>
+                        <span class="tag">Strategic Planning</span>
+                        <span class="tag">Performance Under Pressure</span>
+                    </div>
+                </div>
             </div>
+    
             <div class="content-card">
-                <p class="card-text">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
+                <h3 class="card-title">Learning Assistant</h3>
+                <div class="card-content">
+                    <ul class="bullet-list">
+                        <li>2025 Spring Semester</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Contact Popup -->
+    <!-- Contact Section -->
     <div id="contact" class="popup">
-        <button class="close-btn">x</button>
         <div class="popup-content">
+            <button class="close-btn">x</button>
             <h2 class="section-title">Contact Me</h2>
+            <div class="profile-section">
+                <p>Feel free to contact me. I am excited about all opportunities that come my way!</p>
+            </div>
             <div class="content-card">
-                <p class="card-text">I'm always open to new opportunities and collaborations. Feel free to reach out!</p>
                 <div class="contact-links">
-                    <p>cooperkier18@gmail.com</p>
-                    <p>303-915-2517</p>
+                    <p class="contact-item">cooperkier18@gmail.com</p>
+                    <p class="contact-item">303-915-2517</p>
                     <div class="social-links">
                         <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                         <a href="https://www.linkedin.com/in/cooper-kier-b2bb112a0/" class="social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -180,8 +299,5 @@
             </div>
         </div>
     </div>
-
-    <script type="module" src="main.js"></script>
-    <script type="module" src="popup.js"></script>
 </body>
 </html>

@@ -108,7 +108,7 @@ class Scene3D {
     this.scene.add(rimLight);
 
     // Purple fill light
-    const fillLight = new THREE.PointLight(0xff00ff, 2, 10);
+    const fillLight = new THREE.PointLight(0xffffff, 2, 10);
     fillLight.position.set(-2, 1, 2);
     this.scene.add(fillLight);
 

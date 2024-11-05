@@ -7,10 +7,10 @@
 
 /* Animated background */
 body {
-  background: linear-gradient(-45deg, #ffffff, #000000, #ffffff);
+  background: linear-gradient(-45deg, #ffffff, #000000, #87e0d9);
   background-size: 400% 400%;
   animation: gradient 60s ease infinite;
-  overflow-x: hidden;
+  overflow: hidden;
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -82,7 +82,7 @@ nav a:hover::after {
 
 /* 3D Scene Container */
 #container3D {
-  padding-top: 80px;
+  padding-top: 110px;
   padding-bottom: 0;
   width: 100%;
   overflow: hidden;
@@ -190,6 +190,7 @@ nav a:hover::after {
 .profile-section {
   text-align: center;
   margin-bottom: 2rem;
+  font-size: large;
 }
 
 .profile-img {
