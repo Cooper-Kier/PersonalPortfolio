@@ -1,4 +1,4 @@
-**My Personal Portfolio Website**
+## My Personal Portfolio Website
 Welcome to my personal portfolio website! This interactive platform showcases my projects and skills, leveraging state-of-the-art web technologies to create an engaging user experience.
 
 ## Technologies
