@@ -85,12 +85,15 @@ class Scene3D {
     element.style.fontSize = '13px';
     element.style.fontWeight = 'normal';
     element.style.textAlign = 'center';
-    element.style.background = '#fff';
-    element.style.color = '#000';
+    element.style.background = '#f8f8f8'; 
+    element.style.color = '#333'; 
     element.style.padding = '1.5em';
     element.style.width = '400px';
     element.style.margin = '5em auto 0';
-    element.innerHTML = 'Your browser or device does not seem to support WebGL.<br>Please try using a different browser or device.';
+    element.style.borderRadius = '10px';
+    element.style.opacity = '0.9';
+    element.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)'; 
+    element.innerHTML = 'Your browser or device does not support my model.<br>Please try using a different browser or device :).';
     return element;
   }
 
