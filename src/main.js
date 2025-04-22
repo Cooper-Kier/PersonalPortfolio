@@ -93,7 +93,7 @@ class Scene3D {
     element.style.borderRadius = '10px';
     element.style.opacity = '0.9';
     element.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)'; 
-    element.innerHTML = 'Your browser or device does not support my model.<br>Please try using a different browser or device :).';
+    element.innerHTML = 'Your browser or device does not support my model.<br>Please try using a different browser or device :)';
     return element;
   }
 
