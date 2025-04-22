@@ -37,12 +37,12 @@
         <div class="popup-content">
             <button class="close-btn">x</button>
             <h2 class="section-title">About Me</h2>
-
+    
             <div class="profile-section">
                 <img src="./Images/profile.jpg" alt="Cooper Kier" class="profile-img">
                 <p>Hello! I'm Cooper. Welcome to my interactive portfolio. I am currently a student at the University of Colorado Boulder, where I am deeply passionate about engineering and technology. Outside of my academic pursuits, I enjoy skiing, playing football, and getting immersed in various video games. Feel free to explore my portfolio to see how my interests and skills come together in my projects and experiences.</p>
             </div>
-
+    
             <div class="content-card">
                 <h3 class="card-title">Education</h3>
                 <div class="card-content">
@@ -50,12 +50,13 @@
                     <em>Electrical and Computer Engineering, B.S.</em></p>
                     <em>Computer Science, Minor</em><br>
                     <em>Quantum Engineering, Minor</em><br>
+                    <em>Philosophy, Minor</em><br>
                     <p>Expected Graduation: Dec 2026<br>
                     GPA: 3.7<br>
                     Achievements: Dean's List</p>
                 </div>
             </div>
-
+    
             <div class="content-card">
                 <h3 class="card-title">Technical Skills</h3>
                 <div class="card-grid">
@@ -64,9 +65,10 @@
                         <ul class="skill-list">
                             <li>C++</li>
                             <li>Python</li>
+                            <li>Java</li>
                             <li>SQL</li>
-                            <li>Swift/SwiftUI</li>
-                            <li>MATLAB</li>
+                            <li>JavaScript</li>
+                            <li>Swift</li>
                         </ul>
                     </div>
                     <div class="skill-group">
@@ -74,10 +76,10 @@
                         <ul class="skill-list">
                             <li>AWS</li>
                             <li>TensorFlow</li>
-                            <li>Git</li>
-                            <li>React</li>
-                            <li>Node.js</li>
-                            <li>HTML/CSS</li>
+                            <li>Docker</li>
+                            <li>Google Cloud</li>
+                            <li>Git/GitHub</li>
+                            <li>APIs</li>
                         </ul>
                     </div>
                 </div>
@@ -93,17 +95,41 @@
         <h2 class="section-title">Projects</h2>
         
             <div class="content-card">
+                <h3 class="card-title">Machine Learning-Based Spam Detection System</h3>
+                    <div class="card-content">
+                    Email and text message spam detection system utilizing machine learning for accurate classification.
+                    
+                    <ul class="bullet-list">
+                        <li>Developed a spam detection system using TensorFlow to process text data</li>
+                        <li>Containerized the model with Docker and deployed it on Google Cloud via TensorFlow Serving</li>
+                        <li>Built a Python Flask web app for real-time classification with a RESTful API</li>
+                    </ul>
+    
+                    <div class="social-links">
+                        <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                    
+                    <div class="tag-container">
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">Google Cloud</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-card">
                 <h3 class="card-title">3D Interactive Portfolio - Web Application</h3>
                     <div class="card-content">
                     A modern, interactive portfolio website featuring a 3D environment built with Three.js and modern web technologies.
                     
                     <ul class="bullet-list">
-                        <li>Developed an immersive 3D room environment with interactive objects</li>
+                        <li>Designed and developed a personal portfolio website using HTML, CSS, and JavaScript</li>
+                        <li>Created custom 3D model built in Blender and integrated with Three.js</li>
                         <li>Implemented raycasting for object interaction and highlighting effects</li>
-                        <li>Created a responsive popup system for content display</li>
                         <li>Integrated smooth camera controls and transitions</li>
                     </ul>
-
+    
                     <div class="social-links">
                         <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                     </div>
@@ -112,7 +138,7 @@
                         <span class="tag">Three.js</span>
                         <span class="tag">JavaScript</span>
                         <span class="tag">HTML/CSS</span>
-                        <span class="tag">3D Graphics</span>
+                        <span class="tag">Blender</span>
                     </div>
                 </div>
             </div>
@@ -123,11 +149,12 @@
                     A mobile application published on Apple's App Store with over 100 downloads, featuring machine learning-powered functionality.
                     
                     <ul class="bullet-list">
-                        <li>Integrated AWS API Gateway and Lambda for user data processing</li>
-                        <li>Scraped and refined 20,000+ data points for ML model training</li>
-                        <li>Achieved 87% accuracy with TensorFlow model using Google Colab and Keras</li>
+                        <li>Developed and published a Swift/Xcode mobile app on Apple's App Store</li>
+                        <li>Utilized AWS (API Gateway, Lambda) for user data processing</li>
+                        <li>Integrated OpenAI's ChatGPT API for predictive cost calculations</li>
+                        <li>Optimized AWS/OpenAI costs to balance performance and affordability</li>
                     </ul>
-
+    
                     <div class="social-links">
                         <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
                     </div>
@@ -135,33 +162,8 @@
                     <div class="tag-container">
                         <span class="tag">Swift</span>
                         <span class="tag">AWS</span>
-                        <span class="tag">TensorFlow</span>
-                        <span class="tag">Machine Learning</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="content-card">
-                <h3 class="card-title">Personal Finance Tracker</h3>
-                    <div class="card-content">
-                    A full-stack web application for tracking personal finances with modern security features.
-                    
-                    <ul class="bullet-list">
-                        <li>Built responsive UI with React and TypeScript</li>
-                        <li>Implemented Clerk authentication for user sign-in</li>
-                        <li>Developed RESTful APIs using Express.js and Node.js</li>
-                        <li>Managed data with MongoDB and Mongoose</li>
-                    </ul>
-
-                    <div class="social-links">
-                        <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    </div>
-                    
-                    <div class="tag-container">
-                        <span class="tag">React</span>
-                        <span class="tag">TypeScript</span>
-                        <span class="tag">Node.js</span>
-                        <span class="tag">MongoDB</span>
+                        <span class="tag">OpenAI API</span>
+                        <span class="tag">Xcode</span>
                     </div>
                 </div>
             </div>
@@ -194,22 +196,34 @@
         <div class="popup-content">
             <button class="close-btn">x</button>
             <h2 class="section-title">Experience</h2>
-
+    
             <div class="timeline">
                 <div class="content-card">
                     <div class="card-header">
-                        <h3 class="card-title">Leak Survey Intern</h3>
-                        <span class="date">May 2024 - August 2024</span>
+                        <h3 class="card-title">Software Engineer Intern</h3>
+                        <span class="date">May 2025 - August 2025</span>
                     </div>
-                    <p class="company">HydromaxUSA</p>
+                    <p class="company">Empower – Denver, CO</p>
                     <ul class="bullet-list">
-                        <li>Conducted daily surveys of Xcel Energy assets for consumer protection</li>
-                        <li>Documented average of 4 gas leaks daily, covering 85,000+ feet weekly</li>
-                        <li>Ranked consistently in top 5 employees for daily productivity</li>
-                        <li>Maintained detailed documentation for colleagues and management</li>
+                        <li>Contributing to backend development and API integration using Java and Python</li>
+                        <li>Utilizing Amazon Web Services for scalable infrastructure and deployment</li>
                     </ul>
                 </div>
-
+    
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3 class="card-title">Field Engineer Intern</h3>
+                        <span class="date">May 2024 - August 2024</span>
+                    </div>
+                    <p class="company">HydromaxUSA – Denver, CO</p>
+                    <ul class="bullet-list">
+                        <li>Performed daily field surveys to monitor and assess the condition of Xcel Energy infrastructure</li>
+                        <li>Reported an average of 4 gas leaks per day, surveying over 85,000 feet weekly, exceeding expectations by 41%</li>
+                        <li>Maintained detailed records of inspection data and observations to support decision-making</li>
+                        <li>Consistently ranked in the top 5 for field productivity, contributing to a 7% increase in project revenue</li>
+                    </ul>
+                </div>
+    
                 <div class="content-card">
                     <div class="card-header">
                         <h3 class="card-title">Other Non-Technical Roles</h3>
