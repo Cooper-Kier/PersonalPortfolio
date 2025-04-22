@@ -5,11 +5,11 @@ import { showPopup } from './popup.js';
 
 class Scene3D {
   constructor(containerId) {
-    //Scene 
+    // Scene 
     this.container = document.getElementById(containerId);
     this.scene = new THREE.Scene();
 
-    //Objects
+    // Objects
     this.highlightableObjects = new Map();
     this.outlineMeshes = new Map();
     this.originalScales = new Map();
@@ -17,7 +17,7 @@ class Scene3D {
 
     this.externalLinks = new Map([
       ['Github', 'https://github.com/Cooper-Kier'],
-      ['LinkedIn', 'https://www.linkedin.com/in/cooper-kier-b2bb112a0/']  // Replace with your LinkedIn username
+      ['LinkedIn', 'https://www.linkedin.com/in/cooper-kier-b2bb112a0/']
     ]);
 
     this.objectToPopupMap = new Map([
@@ -29,39 +29,126 @@ class Scene3D {
       ['Phone', 'contact']
     ]);
 
-    //Mouse
+    // Mouse
     this.mouse = new THREE.Vector2();
     this.raycaster = new THREE.Raycaster();
     this.raycaster.params.Line.threshold = 0.1;
     this.raycaster.params.Points.threshold = 0.1;
 
-    //Initiallers
-    this.initRenderer();
-    this.initCamera();
-    this.initControls();
-    this.initLights();
-    this.initEventListeners();
-    this.loadModel();
-
-    this.animate();
+    // Check WebGL support before initialization
+    this.initializeScene();
   }
 
+  // Check WebGL compatibility and initialize
+  initializeScene() {
+    try {
+      // Check if WebGL is available
+      if (!this.isWebGLAvailable()) {
+        const warning = this.getWebGLErrorMessage();
+        this.container.appendChild(warning);
+        return;
+      }
 
-  //Initializers
-  initRenderer() {
-    this.renderer = new THREE.WebGLRenderer({ 
-        alpha: true, 
-        antialias: true 
-    });
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-    this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.renderer.physicallyCorrectLights = true;
-    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    this.renderer.toneMappingExposure = 2.5;
+      // Initialize components
+      this.initRenderer();
+      this.initCamera();
+      this.initControls();
+      this.initLights();
+      this.initEventListeners();
+      this.loadModel();
+
+      // Start animation loop
+      this.animate();
+    } catch (error) {
+      console.error("Error initializing 3D scene:", error);
+      // Display fallback content
+      this.displayFallbackContent();
+    }
+  }
+
+  // Check if WebGL is available
+  isWebGLAvailable() {
+    try {
+      const canvas = document.createElement('canvas');
+      return !!(window.WebGLRenderingContext && 
+        (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // Display error message
+  getWebGLErrorMessage() {
+    const element = document.createElement('div');
+    element.id = 'webgl-error-message';
+    element.style.fontFamily = 'monospace';
+    element.style.fontSize = '13px';
+    element.style.fontWeight = 'normal';
+    element.style.textAlign = 'center';
+    element.style.background = '#fff';
+    element.style.color = '#000';
+    element.style.padding = '1.5em';
+    element.style.width = '400px';
+    element.style.margin = '5em auto 0';
+    element.innerHTML = 'Your browser or device does not seem to support WebGL.<br>Please try using a different browser or device.';
+    return element;
+  }
+
+  // Display fallback content
+  displayFallbackContent() {
+    const fallback = document.createElement('div');
+    fallback.style.textAlign = 'center';
+    fallback.style.padding = '2em';
+    fallback.innerHTML = `
+      <h3>3D View Not Available</h3>
+      <p>Sorry, we couldn't load the 3D view. Please use the navigation links instead.</p>
+      <div style="margin-top: 20px;">
+        <button class="fallback-nav-btn" data-popup="about">About Me</button>
+        <button class="fallback-nav-btn" data-popup="projects">Projects</button>
+        <button class="fallback-nav-btn" data-popup="experience">Experience</button>
+        <button class="fallback-nav-btn" data-popup="extracurricular">Leadership</button>
+        <button class="fallback-nav-btn" data-popup="contact">Contact</button>
+      </div>
+    `;
     
-    this.container.appendChild(this.renderer.domElement);
+    this.container.appendChild(fallback);
+    
+    // Add event listeners to fallback buttons
+    const buttons = fallback.querySelectorAll('.fallback-nav-btn');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const popupId = button.getAttribute('data-popup');
+        if (popupId) {
+          showPopup(popupId);
+        }
+      });
+    });
+  }
+
+  // Initializers with error handling
+  initRenderer() {
+    try {
+      // Try with different antialias settings if needed
+      this.renderer = new THREE.WebGLRenderer({ 
+        alpha: true, 
+        antialias: true,
+        powerPreference: 'default',
+        failIfMajorPerformanceCaveat: false
+      });
+      
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+      this.renderer.shadowMap.enabled = true;
+      this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
+      this.renderer.physicallyCorrectLights = true;
+      this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      this.renderer.toneMappingExposure = 2.5;
+      
+      this.container.appendChild(this.renderer.domElement);
+    } catch (error) {
+      console.error("Failed to initialize renderer:", error);
+      throw error; // Re-throw to be caught by initializeScene
+    }
   }
 
   initCamera() {
@@ -81,12 +168,9 @@ class Scene3D {
     this.controls.minAzimuthAngle = 0;
     this.controls.maxPolarAngle = Math.PI/3;
     this.controls.minPolarAngle = Math.PI/4;
-
     this.controls.enablePan = false;
-    
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.05;
-    
     this.controls.rotateSpeed = 0.5;
   }
 
@@ -151,34 +235,106 @@ class Scene3D {
         side: THREE.BackSide
     });
 
-    // Add loading manager to debug issues
+    // Add loading manager with better error handling
     const loadingManager = new THREE.LoadingManager();
-    loadingManager.onError = function(url) {
+    loadingManager.onError = (url) => {
         console.error('Error loading:', url);
+        // Try alternative path if the initial path fails
+        if (url.startsWith('/models/')) {
+            console.log('Trying alternate path...');
+            const newUrl = url.replace('/models/', './models/');
+            loader.load(
+                newUrl,
+                (gltf) => {
+                    const object = gltf.scene;
+                    this.processSceneObjects(object, outlineMaterial);
+                    this.scene.add(object);
+                },
+                undefined,
+                (error) => {
+                    console.error('Failed with alternate path:', error);
+                    this.displayModelLoadingError();
+                }
+            );
+        } else {
+            this.displayModelLoadingError();
+        }
     };
 
-    // Use absolute path and add error handling
-    loader.setPath('/models/');
+    loader.manager = loadingManager;
+
+    // Create a simple loading indicator
+    const loadingElement = document.createElement('div');
+    loadingElement.style.position = 'absolute';
+    loadingElement.style.top = '50%';
+    loadingElement.style.left = '50%';
+    loadingElement.style.transform = 'translate(-50%, -50%)';
+    loadingElement.style.color = 'white';
+    loadingElement.style.fontSize = '18px';
+    loadingElement.textContent = 'Loading 3D environment...';
+    this.container.appendChild(loadingElement);
+
+    // Try to load with both absolute and relative paths
     loader
         .load(
-            'Room.glb',
+            '/models/Room.glb',
             (gltf) => {
                 const object = gltf.scene;
                 this.processSceneObjects(object, outlineMaterial);
                 this.scene.add(object);
+                this.container.removeChild(loadingElement);
             },
             // Progress callback
             (xhr) => {
-                console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+                if (xhr.lengthComputable) {
+                    const percentComplete = xhr.loaded / xhr.total * 100;
+                    loadingElement.textContent = `Loading: ${Math.round(percentComplete)}%`;
+                }
             },
             // Error callback
             (error) => {
-                console.error('An error occurred loading the model:', error);
+                console.error('Error loading with absolute path:', error);
+                console.log('Trying relative path...');
+                
+                // Try with relative path
+                loader.load(
+                    './models/Room.glb',
+                    (gltf) => {
+                        const object = gltf.scene;
+                        this.processSceneObjects(object, outlineMaterial);
+                        this.scene.add(object);
+                        this.container.removeChild(loadingElement);
+                    },
+                    undefined,
+                    (secondError) => {
+                        console.error('Error loading with relative path:', secondError);
+                        this.displayModelLoadingError();
+                        this.container.removeChild(loadingElement);
+                    }
+                );
             }
         );
   }
 
-  //Group meshes to object
+  displayModelLoadingError() {
+    const errorElement = document.createElement('div');
+    errorElement.style.position = 'absolute';
+    errorElement.style.top = '50%';
+    errorElement.style.left = '50%';
+    errorElement.style.transform = 'translate(-50%, -50%)';
+    errorElement.style.color = 'white';
+    errorElement.style.background = 'rgba(0,0,0,0.7)';
+    errorElement.style.padding = '20px';
+    errorElement.style.borderRadius = '10px';
+    errorElement.style.textAlign = 'center';
+    errorElement.innerHTML = `
+        <h3>Couldn't load 3D model</h3>
+        <p>Please use the navigation menu to explore the portfolio.</p>
+    `;
+    this.container.appendChild(errorElement);
+  }
+
+  // The rest of your methods remain largely unchanged
   processSceneObjects(object, outlineMaterial) {
     object.traverse((child) => {
         if (child.name === 'Football' ||
@@ -228,7 +384,6 @@ class Scene3D {
     });
   }
 
-  //Highlighting object methods
   clearAllHighlights() {
     this.outlineMeshes.forEach(({mesh, originalObject}) => {
         mesh.visible = false;
@@ -273,8 +428,8 @@ class Scene3D {
     outlineMesh.scale.setFromMatrixScale(originalMesh.matrixWorld).multiplyScalar(1);
   }
   
-  //User event handling
   onWindowResize = () => {
+    if (!this.renderer) return;
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -381,25 +536,45 @@ class Scene3D {
     }
   }
   
-
-  
   animate = () => {
+      if (!this.renderer) return;
+      
       requestAnimationFrame(this.animate);
 
-      this.outlineMeshes.forEach(({mesh, originalObject}) => {
-          if (mesh.visible) {
-              originalObject.updateWorldMatrix(true, false);
-              mesh.position.setFromMatrixPosition(originalObject.matrixWorld);
-              mesh.quaternion.setFromRotationMatrix(originalObject.matrixWorld);
-              mesh.scale.setFromMatrixScale(originalObject.matrixWorld).multiplyScalar(1.05);
-          }
-      });
-      
-      this.controls.update();
-      this.renderer.render(this.scene, this.camera);
+      try {
+          this.outlineMeshes.forEach(({mesh, originalObject}) => {
+              if (mesh.visible) {
+                  originalObject.updateWorldMatrix(true, false);
+                  mesh.position.setFromMatrixPosition(originalObject.matrixWorld);
+                  mesh.quaternion.setFromRotationMatrix(originalObject.matrixWorld);
+                  mesh.scale.setFromMatrixScale(originalObject.matrixWorld).multiplyScalar(1.05);
+              }
+          });
+          
+          this.controls.update();
+          this.renderer.render(this.scene, this.camera);
+      } catch (error) {
+          console.error("Error in animation loop:", error);
+          // Stop the animation loop if there's an error
+          cancelAnimationFrame(this.animate);
+      }
   }
-
 }
 
-// Initialize the scene
-const scene = new Scene3D('container3D');
+// Initialize the scene with error handling
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    const scene = new Scene3D('container3D');
+  } catch (error) {
+    console.error("Failed to initialize 3D scene:", error);
+    const container = document.getElementById('container3D');
+    if (container) {
+      container.innerHTML = `
+        <div style="text-align: center; padding: 2em;">
+          <h3>3D View Not Available</h3>
+          <p>Sorry, we couldn't load the 3D view. Please use the navigation menu instead.</p>
+        </div>
+      `;
+    }
+  }
+});
