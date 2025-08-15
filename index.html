@@ -33,69 +33,66 @@
     <div id="overlay" class="overlay"></div>
 
     <!-- About Section -->
-    <div id="about" class="popup">
-        <div class="popup-content">
-            <button class="close-btn">x</button>
-            <h2 class="section-title">About Me</h2>
-    
-            <div class="profile-section">
-                <img src="./Images/profile.jpg" alt="Cooper Kier" class="profile-img">
-                <p>Hello! I'm Cooper. Welcome to my interactive portfolio. I am currently a student at the University of Colorado Boulder, where I am deeply passionate about engineering and technology. Outside of my academic pursuits, I enjoy skiing, playing football, and getting immersed in various video games. Feel free to explore my portfolio to see how my interests and skills come together in my projects and experiences.</p>
+<div id="about" class="popup">
+    <div class="popup-content">
+        <button class="close-btn">x</button>
+        <h2 class="section-title">About Me</h2>
+
+        <div class="profile-section">
+            <img src="./Images/profile.jpg" alt="Cooper Kier" class="profile-img">
+            <p>Hi, I’m Cooper — a junior at the University of Colorado Boulder pursuing a B.S. in Electrical and Computer Engineering with minors in Computer Science, Quantum Engineering, and Philosophy. I’m passionate about blending hardware, software, and applied AI/ML to solve complex engineering problems. Outside of academics, I enjoy skiing, playing football, and exploring new tech projects.</p>
+        </div>
+
+        <div class="content-card">
+            <h3 class="card-title">Education</h3>
+            <div class="card-content">
+                <p><strong>University of Colorado Boulder</strong><br>
+                <em>B.S. Electrical and Computer Engineering</em><br>
+                <em>Minors: Computer Science, Quantum Engineering, Philosophy</em></p>
+                <p>Expected Graduation: May 2027<br>
+                Major GPA: 4.0</p>
             </div>
-    
-            <div class="content-card">
-                <h3 class="card-title">Education</h3>
-                <div class="card-content">
-                    <p><strong>University of Colorado Boulder</strong><br>
-                    <em>Electrical and Computer Engineering, B.S.</em></p>
-                    <em>Computer Science, Minor</em><br>
-                    <em>Quantum Engineering, Minor</em><br>
-                    <em>Philosophy, Minor</em><br>
-                    <p>Expected Graduation: Dec 2026<br>
-                    Major GPA: 4.0 | Overall GPA: 3.75<br>
-                    Achievements: Dean's List</p>
+        </div>
+
+        <div class="content-card">
+            <h3 class="card-title">Technical Skills</h3>
+            <div class="card-grid">
+                <div class="skill-group">
+                    <h4 class="skill-title">Languages</h4>
+                    <ul class="skill-list">
+                        <li>C++</li>
+                        <li>Python</li>
+                        <li>Verilog</li>
+                        <li>Java</li>
+                        <li>MATLAB</li>
+                        <li>Swift</li>
+                    </ul>
                 </div>
-            </div>
-    
-            <div class="content-card">
-                <h3 class="card-title">Technical Skills</h3>
-                <div class="card-grid">
-                    <div class="skill-group">
-                        <h4 class="skill-title">Languages</h4>
-                        <ul class="skill-list">
-                            <li>C++</li>
-                            <li>Python</li>
-                            <li>Java</li>
-                            <li>SQL</li>
-                            <li>JavaScript</li>
-                            <li>Swift</li>
-                            <li>Verilog</li>
-                            <li>Matlab</li>
-                        </ul>
-                    </div>
-                    <div class="skill-group">
-                        <h4 class="skill-title">Technologies</h4>
-                        <ul class="skill-list">
-                            <li>AWS</li>
-                            <li>TensorFlow</li>
-                            <li>Docker</li>
-                            <li>Google Cloud</li>
-                            <li>Git/GitHub</li>
-                            <li>APIs</li>
-                            <li>Circuit Design</li>
-                            <li>PCB Design</li>
-                            <li>FPGAs</li>
-                            <li>Altium Designer</li>
-                            <li>LTSpice</li>
-                            <li>Vivado</li>
-                            <li>Linux</li>
-                        </ul>
-                    </div>
+                <div class="skill-group">
+                    <h4 class="skill-title">Technologies</h4>
+                    <ul class="skill-list">
+                        <li>FPGAs</li>
+                        <li>Circuit & PCB Design</li>
+                        <li>Altium Designer</li>
+                        <li>LTSpice</li>
+                        <li>Vivado</li>
+                        <li>Linux</li>
+                        <li>AWS</li>
+                    </ul>
+                </div>
+                <div class="skill-group">
+                    <h4 class="skill-title">Certifications</h4>
+                    <ul class="skill-list">
+                        <li>FINRA SIE</li>
+                        <li>AWS Certified AI Practitioner</li>
+                        <li>AWS Certified Cloud Practitioner</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-
+</div>
+    
     <!-- Projects Section -->
     <div id="projects" class="popup">
         <div class="popup-content">
@@ -182,7 +179,7 @@
                     
                     <ul class="bullet-list">
                         <li>Designed and developed a personal portfolio website using HTML, CSS, and JavaScript</li>
-                        <li>Created custom 3D model built in Blender and integrated with Three.js</li>
+                        <li>Created a custom 3D model built in Blender and integrated with Three.js</li>
                         <li>Implemented raycasting for object interaction and highlighting effects</li>
                         <li>Integrated smooth camera controls and transitions</li>
                     </ul>
@@ -256,52 +253,65 @@
     </div>
 
     <!-- Experience Section -->
-    <div id="experience" class="popup">
-        <div class="popup-content">
-            <button class="close-btn">x</button>
-            <h2 class="section-title">Experience</h2>
-    
-            <div class="timeline">
-                <div class="content-card">
-                    <div class="card-header">
-                        <h3 class="card-title">Software Engineer Intern</h3>
-                        <span class="date">May 2025 - August 2025</span>
-                    </div>
-                    <p class="company">Empower – Denver, CO</p>
-                    <ul class="bullet-list">
-                        <li>Built a comprehensive AWS health monitoring dashboard to track 100+ internal AWS accounts</li>
-                        <li>Measured system metrics and infrastructure health using AWS Kinesis Data Firehose for real-time data streaming</li>
-                        <li>Implemented AWS Health API for service status monitoring and SNS for automated alerting and notifications</li>
-                        <li>More projects planned with a focus on reducing AWS costs company-wide</li>
-                    </ul>
-                    <div class="tag-container">
-                        <span class="tag">AWS</span>
-                        <span class="tag">Kinesis Data Firehose</span>
-                        <span class="tag">Health API</span>
-                        <span class="tag">SNS</span>
-                        <span class="tag">CloudWatch</span>
-                        <span class="tag">S3</span>
-                        <span class="tag">Python</span>
-                        <span class="tag">Java</span>
-                    </div>
+<div id="experience" class="popup">
+    <div class="popup-content">
+        <button class="close-btn">x</button>
+        <h2 class="section-title">Experience</h2>
+
+        <div class="timeline">
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">Research Assistant</h3>
+                    <span class="date">Aug 2025 – May 2026</span>
                 </div>
-    
-                <div class="content-card">
-                    <div class="card-header">
-                        <h3 class="card-title">Field Engineer Intern</h3>
-                        <span class="date">May 2024 - August 2024</span>
-                    </div>
-                    <p class="company">HydromaxUSA – Denver, CO</p>
-                    <ul class="bullet-list">
-                        <li>Performed daily field surveys to monitor and assess the condition of Xcel Energy infrastructure</li>
-                        <li>Reported an average of 4 gas leaks per day while surveying over 85,000 feet weekly, exceeding expectations by 41%</li>
-                        <li>Maintained detailed records of inspection data and observations to support decision-making by management</li>
-                        <li>Consistently ranked in the top 5 for field productivity, contributing to a 7% increase in project revenue</li>
-                    </ul>
+                <p class="company">University of Colorado Boulder</p>
+                <ul class="bullet-list">
+                    <li>Automating photonic integrated circuit characterization using FPGA-based neural networks for real-time control.</li>
+                    <li>Developing deep learning models in Python integrated with Moku:Pro FPGA hardware.</li>
+                </ul>
+                <div class="tag-container">
+                    <span class="tag">Python</span>
+                    <span class="tag">FPGAs</span>
+                    <span class="tag">Verilog</span>
+                    <span class="tag">Vivado</span>
+                    <span class="tag">ML/AI</span>
                 </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">Software Engineer Intern</h3>
+                    <span class="date">May 2025 – Aug 2025</span>
+                </div>
+                <p class="company">Empower – Denver, CO</p>
+                <ul class="bullet-list">
+                    <li>Designed and deployed AWS health monitoring dashboards for 100+ accounts.</li>
+                    <li>Integrated AWS Kinesis Data Firehose, SNS, and Lambda for real-time incident tracking.</li>
+                    <li>Automated Jira/ServiceNow ticket creation, reducing manual intervention by ~80%.</li>
+                </ul>
+                <div class="tag-container">
+                    <span class="tag">AWS</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Kinesis</span>
+                    <span class="tag">Lambda</span>
+                    <span class="tag">CloudWatch</span>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">Field Engineer Intern</h3>
+                    <span class="date">May 2024 – Aug 2024</span>
+                </div>
+                <p class="company">HydromaxUSA – Denver, CO</p>
+                <ul class="bullet-list">
+                    <li>Surveyed 85,000+ feet of pipeline weekly, detecting an average of 4 gas leaks per day.</li>
+                    <li>Ranked top 5 for performance and contributed to a 7% project revenue increase.</li>
+                </ul>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Extracurricular Section -->
     <div id="extracurricular" class="popup">
