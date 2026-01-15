@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cooper Kier's portfolio - Computer Science and Electrical Engineering student at University of Colorado Boulder">
-    <meta name="keywords" content="Cooper Kier, portfolio, computer science, electrical engineering, CU Boulder">
-    <meta name="robots" content="index, follow">
+    <meta name="description" content="Cooper Kier portfolio - Electrical and Computer Engineering student at CU Boulder">
+    <meta name="keywords" content="Cooper Kier, Electrical Engineering, Computer Engineering, CU Boulder">
     <link rel="stylesheet" href="style.css">
     <script type="module" src="./src/main.js"></script>
     <script type="module" src="./src/popup.js"></script>
@@ -13,380 +12,152 @@
     <link rel="icon" type="image/x-icon" href="./public/Images/favicon.ico">
 </head>
 <body>
-    <nav>
-        <button class="nav-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        <h2>CK.</h2>
-        <ul>
-            <li><a href="#" data-popup="about">About Me</a></li>
-            <li><a href="#" data-popup="projects">Projects</a></li>
-            <li><a href="#" data-popup="experience">Experience</a></li>
-            <li><a href="#" data-popup="extracurricular">Leadership</a></li>
-            <li><a href="#" data-popup="contact">Contact</a></li>
-        </ul>
-    </nav>
+<nav>
+    <button class="nav-toggle"><span></span><span></span><span></span></button>
+    <h2>CK.</h2>
+    <ul>
+        <li><a href="#" data-popup="about">About</a></li>
+        <li><a href="#" data-popup="projects">Projects</a></li>
+        <li><a href="#" data-popup="experience">Experience</a></li>
+        <li><a href="#" data-popup="extracurricular">Leadership</a></li>
+        <li><a href="#" data-popup="contact">Contact</a></li>
+    </ul>
+</nav>
 
-    <div id="container3D"></div>
-    <div id="overlay" class="overlay"></div>
+<div id="container3D"></div>
+<div id="overlay" class="overlay"></div>
 
-    <!-- About Section -->
+<!-- About -->
 <div id="about" class="popup">
-    <div class="popup-content">
-        <button class="close-btn">x</button>
-        <h2 class="section-title">About Me</h2>
+<div class="popup-content">
+<button class="close-btn">x</button>
+<h2 class="section-title">About Me</h2>
 
-        <div class="profile-section">
-            <img src="./Images/profile.jpg" alt="Cooper Kier" class="profile-img">
-            <p>Hi, I’m Cooper — a junior at the University of Colorado Boulder pursuing a B.S. in Electrical and Computer Engineering with minors in Computer Science, Quantum Engineering, and Philosophy. I’m passionate about blending hardware, software, and applied AI/ML to solve complex engineering problems. Outside of academics, I enjoy skiing, playing football, and exploring new tech projects.</p>
-        </div>
-
-        <div class="content-card">
-            <h3 class="card-title">Education</h3>
-            <div class="card-content">
-                <p><strong>University of Colorado Boulder</strong><br>
-                <em>B.S. Electrical and Computer Engineering</em><br>
-                <em>Minors: Computer Science, Quantum Engineering, Philosophy</em></p>
-                <p>Expected Graduation: May 2027<br>
-                Major GPA: 4.0</p>
-            </div>
-        </div>
-
-        <div class="content-card">
-            <h3 class="card-title">Technical Skills</h3>
-            <div class="card-grid">
-                <div class="skill-group">
-                    <h4 class="skill-title">Languages</h4>
-                    <ul class="skill-list">
-                        <li>C++</li>
-                        <li>Python</li>
-                        <li>Verilog</li>
-                        <li>Java</li>
-                        <li>MATLAB</li>
-                        <li>Swift</li>
-                    </ul>
-                </div>
-                <div class="skill-group">
-                    <h4 class="skill-title">Technologies</h4>
-                    <ul class="skill-list">
-                        <li>FPGAs</li>
-                        <li>Circuit & PCB Design</li>
-                        <li>Altium Designer</li>
-                        <li>LTSpice</li>
-                        <li>Vivado</li>
-                        <li>Linux</li>
-                        <li>AWS</li>
-                    </ul>
-                </div>
-                <div class="skill-group">
-                    <h4 class="skill-title">Certifications</h4>
-                    <ul class="skill-list">
-                        <li>FINRA SIE</li>
-                        <li>AWS Certified AI Practitioner</li>
-                        <li>AWS Certified Cloud Practitioner</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="profile-section">
+<img src="./Images/profile.jpg" alt="Cooper Kier" class="profile-img">
+<p>I am a junior at the University of Colorado Boulder pursuing a B.S. in Electrical and Computer Engineering with minors in Computer Science, Quantum Engineering, and Philosophy. My interests sit at the intersection of hardware, software, and applied AI, with experience across embedded systems, cloud infrastructure, and digital design.</p>
 </div>
-    
-    <!-- Projects Section -->
-    <div id="projects" class="popup">
-        <div class="popup-content">
-            <button class="close-btn">x</button>
-        
-        <h2 class="section-title">Projects</h2>
-        
-            <div class="content-card">
-                <h3 class="card-title">Machine Learning-Based Spam Detection System</h3>
-                    <div class="card-content">
-                    Email and text message spam detection system utilizing machine learning for accurate classification.
-                    
-                    <ul class="bullet-list">
-                        <li>Developed a spam detection system using TensorFlow to process text data</li>
-                        <li>Containerized the model with Docker and deployed it on Google Cloud via TensorFlow Serving</li>
-                        <li>Built a Python Flask web app for real-time classification with a RESTful API</li>
-                    </ul>
-    
-                    <div class="social-links">
-                        <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    </div>
-                    
-                    <div class="tag-container">
-                        <span class="tag">TensorFlow</span>
-                        <span class="tag">Docker</span>
-                        <span class="tag">Google Cloud</span>
-                        <span class="tag">Python</span>
-                    </div>
-                </div>
-            </div>
 
-            <div class="content-card">
-                <h3 class="card-title">Various FPGA Projects</h3>
-                    <div class="card-content">
-                    Digital design projects demonstrating advanced FPGA programming and circuit implementation.
-                    
-                    <ul class="bullet-list">
-                        <li>FPGA projects demonstrating digital design principles, including state machines and timing systems</li>
-                        <li>Utilized Verilog and Xilinx Vivado to design, simulate, and implement custom digital circuits on FPGAs</li>
-                        <li>Developed complex sequential and combinational logic circuits</li>
-                    </ul>
-    
-                    <div class="social-links">
-                        <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    </div>
-                    
-                    <div class="tag-container">
-                        <span class="tag">Verilog</span>
-                        <span class="tag">Xilinx Vivado</span>
-                        <span class="tag">FPGAs</span>
-                        <span class="tag">Digital Design</span>
-                    </div>
-                </div>
-            </div>
+<div class="content-card">
+<h3 class="card-title">Education</h3>
+<p><strong>University of Colorado Boulder</strong><br>
+B.S. Electrical and Computer Engineering<br>
+Minors: Computer Science, Quantum Engineering, Philosophy<br>
+Expected Graduation: May 2027<br>
+GPA: 3.80 | Major GPA: 4.0</p>
+</div>
 
-            <div class="content-card">
-                <h3 class="card-title">FM Radio Receiver</h3>
-                    <div class="card-content">
-                    Custom-designed FM radio receiver with PCB development and hardware implementation.
-                    
-                    <ul class="bullet-list">
-                        <li>Designed and implemented an FM radio receiver using a custom PCB developed in Altium Designer</li>
-                        <li>Utilized soldering and debugging techniques to assemble and refine the receiver for optimal performance</li>
-                        <li>Applied analog circuit design principles for signal processing and amplification</li>
-                    </ul>
-    
-                    <div class="social-links">
-                        <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    </div>
-                    
-                    <div class="tag-container">
-                        <span class="tag">Altium Designer</span>
-                        <span class="tag">LTSpice</span>
-                        <span class="tag">PCB Design</span>
-                        <span class="tag">Analog Circuits</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="content-card">
-                <h3 class="card-title">3D Interactive Portfolio - Web Application</h3>
-                    <div class="card-content">
-                    A modern, interactive portfolio website featuring a 3D environment built with Three.js and modern web technologies.
-                    
-                    <ul class="bullet-list">
-                        <li>Designed and developed a personal portfolio website using HTML, CSS, and JavaScript</li>
-                        <li>Created a custom 3D model built in Blender and integrated with Three.js</li>
-                        <li>Implemented raycasting for object interaction and highlighting effects</li>
-                        <li>Integrated smooth camera controls and transitions</li>
-                    </ul>
-    
-                    <div class="social-links">
-                        <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    </div>
-                    
-                    <div class="tag-container">
-                        <span class="tag">Three.js</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">HTML/CSS</span>
-                        <span class="tag">Blender</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="content-card">
-                <h3 class="card-title">PriceThat - iOS Application</h3>
-                    <div class="card-content">
-                    A mobile application published on Apple's App Store with over 100 downloads, featuring machine learning-powered functionality.
-                    
-                    <ul class="bullet-list">
-                        <li>Developed and published a Swift/Xcode mobile app on Apple's App Store</li>
-                        <li>Utilized AWS (API Gateway, Lambda) for user data processing and OpenAI's ChatGPT API for predictive cost calculations</li>
-                        <li>Optimized AWS/OpenAI costs to balance performance and affordability</li>
-                        <li>Integrated JSON data processing for seamless API communication</li>
-                    </ul>
-    
-                    <div class="social-links">
-                        <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    </div>
-                    
-                    <div class="tag-container">
-                        <span class="tag">Swift</span>
-                        <span class="tag">AWS</span>
-                        <span class="tag">OpenAI API</span>
-                        <span class="tag">Xcode</span>
-                        <span class="tag">JSON</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="content-card">
-                <h3 class="card-title">Alarm Sleep Mask</h3>
-                    <div class="card-content">
-                    An innovative alarm solution that won 1st place in class at the Engineering Expo.
-                    
-                    <ul class="bullet-list">
-                        <li>Collaborated with a team to design a unique alarm solution, achieving 1st place in class</li>
-                        <li>Used an Arduino microcontroller to connect physical alarm components with Bluetooth devices</li>
-                        <li>Applied circuit design principles and LTSpice simulation for optimal performance</li>
-                        <li>Managed project coordination and team collaboration</li>
-                    </ul>
+<div class="content-card">
+<h3 class="card-title">Skills & Certifications</h3>
+<div class="card-grid">
+<div class="skill-group">
+<h4>Languages</h4>
+<ul class="skill-list"><li>C++</li><li>Python</li><li>Verilog</li><li>MATLAB</li><li>Swift</li></ul>
+</div>
+<div class="skill-group">
+<h4>Technical Areas</h4>
+<ul class="skill-list"><li>Circuit & PCB Design</li><li>FPGAs</li><li>Altium</li><li>LTSpice</li><li>Vivado</li><li>Linux</li></ul>
+</div>
+<div class="skill-group">
+<h4>Certifications</h4>
+<ul class="skill-list"><li>FINRA SIE</li><li>AWS AI Practitioner</li><li>AWS Cloud Practitioner</li></ul>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-                    <div class="social-links">
-                        <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-                    </div>
-                    
-                    <div class="tag-container">
-                        <span class="tag">Arduino</span>
-                        <span class="tag">LTSpice</span>
-                        <span class="tag">Circuit Design</span>
-                        <span class="tag">Bluetooth</span>
-                        <span class="tag">Teamwork</span>
-                    </div>
-                </div>
-            </div>
-        
-        </div>
-    </div>
-
-    <!-- Experience Section -->
+<!-- Experience -->
 <div id="experience" class="popup">
-    <div class="popup-content">
-        <button class="close-btn">x</button>
-        <h2 class="section-title">Experience</h2>
+<div class="popup-content">
+<button class="close-btn">x</button>
+<h2 class="section-title">Experience</h2>
 
-        <div class="timeline">
-            <div class="content-card">
-                <div class="card-header">
-                    <h3 class="card-title">Research Assistant</h3>
-                    <span class="date">Aug 2025 – May 2026</span>
-                </div>
-                <p class="company">University of Colorado Boulder</p>
-                <ul class="bullet-list">
-                    <li>Automating photonic integrated circuit characterization using FPGA-based neural networks for real-time control.</li>
-                    <li>Developing deep learning models in Python integrated with Moku:Pro FPGA hardware.</li>
-                </ul>
-                <div class="tag-container">
-                    <span class="tag">Python</span>
-                    <span class="tag">FPGAs</span>
-                    <span class="tag">Verilog</span>
-                    <span class="tag">Vivado</span>
-                    <span class="tag">ML/AI</span>
-                </div>
-            </div>
-
-            <div class="content-card">
-                <div class="card-header">
-                    <h3 class="card-title">Software Engineer Intern</h3>
-                    <span class="date">May 2025 – Aug 2025</span>
-                </div>
-                <p class="company">Empower – Denver, CO</p>
-                <ul class="bullet-list">
-                    <li>Designed and deployed AWS health monitoring dashboards for 100+ accounts.</li>
-                    <li>Integrated AWS Kinesis Data Firehose, SNS, and Lambda for real-time incident tracking.</li>
-                    <li>Automated Jira/ServiceNow ticket creation, reducing manual intervention by ~80%.</li>
-                </ul>
-                <div class="tag-container">
-                    <span class="tag">AWS</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">Kinesis</span>
-                    <span class="tag">Lambda</span>
-                    <span class="tag">CloudWatch</span>
-                </div>
-            </div>
-
-            <div class="content-card">
-                <div class="card-header">
-                    <h3 class="card-title">Field Engineer Intern</h3>
-                    <span class="date">May 2024 – Aug 2024</span>
-                </div>
-                <p class="company">HydromaxUSA – Denver, CO</p>
-                <ul class="bullet-list">
-                    <li>Surveyed 85,000+ feet of pipeline weekly, detecting an average of 4 gas leaks per day.</li>
-                    <li>Ranked top 5 for performance and contributed to a 7% project revenue increase.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<div class="content-card">
+<h3 class="card-title">Learning Assistant</h3>
+<span class="date">Jan 2026 - May 2026</span>
+<p class="company">University of Colorado Boulder</p>
+<ul class="bullet-list">
+<li>Supported 120 students in an electronics design laboratory through hands-on guidance.</li>
+<li>Assisted with circuit analysis, prototyping, and debugging using lab equipment.</li>
+<li>Provided one-on-one support to improve student understanding and lab performance.</li>
+</ul>
 </div>
 
-    <!-- Extracurricular Section -->
-    <div id="extracurricular" class="popup">
-        <div class="popup-content">
-            <button class="close-btn">x</button>
-    
-            <h2 class="section-title">Leadership</h2>
-    
-            <div class="content-card">
-                <h3 class="card-title">Open Option Engineering Mentor</h3>
-                <div class="card-header">
-                    <span class="date">January 2025 - Present</span>
-                </div>
-                <div class="card-content">
-                    <ul class="bullet-list">
-                        <li>Work with several first-year engineering students, helping them with coursework, personal problems, and class scheduling</li>
-                        <li>Provide guidance on academic challenges and university resource navigation</li>
-                        <li>Support new students in their transition to university life and engineering studies</li>
-                        <li>Foster academic success and personal development in mentees</li>
-                    </ul>
-                    <div class="tag-container">
-                        <span class="tag">Mentoring</span>
-                        <span class="tag">Academic Support</span>
-                        <span class="tag">Student Development</span>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="content-card">
-                <h3 class="card-title">Football Team Captain & Quarterback</h3>
-                <div class="card-header">
-                    <span class="date">August 2019 - December 2022</span>
-                </div>
-                <div class="card-content">
-                    <ul class="bullet-list">
-                        <li>Served as team captain and quarterback, developing leadership, teamwork, and decision-making skills in a high-pressure environment</li>
-                        <li>Led team strategy and execution during games and practice sessions</li>
-                        <li>Demonstrated strong decision-making skills in fast-paced, competitive situations</li>
-                        <li>Fostered team unity and maintained high morale during challenging situations</li>
-                    </ul>
-                    <div class="tag-container">
-                        <span class="tag">Team Leadership</span>
-                        <span class="tag">Decision-Making</span>
-                        <span class="tag">Performance Under Pressure</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="content-card">
+<h3 class="card-title">Software Engineer Intern</h3>
+<span class="date">May 2025 - Aug 2025</span>
+<p class="company">Empower - Denver, CO</p>
+<ul class="bullet-list">
+<li>Built AWS monitoring dashboards across 100+ accounts.</li>
+<li>Integrated Kinesis, CloudWatch, SNS, and Lambda for real-time alerting.</li>
+<li>Automated Jira and ServiceNow ticket creation, reducing manual effort by ~80%.</li>
+</ul>
+</div>
 
-    <!-- Contact Section -->
-    <div id="contact" class="popup">
-        <div class="popup-content">
-            <button class="close-btn">x</button>
-            <h2 class="section-title">Contact Me</h2>
-            <div class="profile-section">
-                <p>Feel free to contact me. I am excited about all the opportunities that come my way!</p>
-            </div>
-            <div class="content-card">
-                <div class="contact-links">
-                    <p class="contact-item">cooperkier18@gmail.com</p>
-                    <p class="contact-item">303-915-2517</p>
-                    <div class="social-links">
-                        <a href="https://github.com/Cooper-Kier" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        <a href="https://www.linkedin.com/in/cooper-kier-b2bb112a0/" class="social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Nav bar  -->
-    <script>
-        document.querySelector('.nav-toggle').addEventListener('click', () => {
-            document.querySelector('nav').classList.toggle('active');
-        });
-    </script>
+<div class="content-card">
+<h3 class="card-title">Field Survey Intern</h3>
+<span class="date">May 2024 - Aug 2024</span>
+<p class="company">HydromaxUSA - Denver, CO</p>
+<ul class="bullet-list">
+<li>Exceeded weekly survey targets using detection equipment and safety protocols.</li>
+<li>Ranked top five in individual performance, contributing to a 7% revenue increase.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Leadership -->
+<div id="extracurricular" class="popup">
+<div class="popup-content">
+<button class="close-btn">x</button>
+<h2 class="section-title">Leadership & Involvement</h2>
+
+<div class="content-card">
+<h3 class="card-title">Independent Study Project</h3>
+<span class="date">Jan 2026 - May 2026</span>
+<ul class="bullet-list">
+<li>Researching non-linear capacitor behavior under high-voltage conditions.</li>
+<li>Producing a final technical report summarizing experimental findings.</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3 class="card-title">Engineering Peer Mentor</h3>
+<span class="date">Aug 2025 - Dec 2025</span>
+<ul class="bullet-list">
+<li>Provided academic and personal support to 30 first-year engineering students.</li>
+</ul>
+</div>
+
+<div class="content-card">
+<h3 class="card-title">Open Option Engineering Mentor</h3>
+<span class="date">Aug 2024 - Present</span>
+<ul class="bullet-list">
+<li>Mentored first-year students through coursework and major selection.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- Contact -->
+<div id="contact" class="popup">
+<div class="popup-content">
+<button class="close-btn">x</button>
+<h2 class="section-title">Contact</h2>
+<p>cooperkier18@gmail.com</p>
+<p>303-915-2517</p>
+<div class="social-links">
+<a href="https://github.com/Cooper-Kier" target="_blank">GitHub</a>
+<a href="https://www.linkedin.com/in/cooper-kier-b2bb112a0/" target="_blank">LinkedIn</a>
+</div>
+</div>
+</div>
+
+<script>
+document.querySelector('.nav-toggle').addEventListener('click', () => {
+    document.querySelector('nav').classList.toggle('active');
+});
+</script>
 </body>
 </html>
